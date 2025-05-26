@@ -1,10 +1,15 @@
-
+import * as rs from 'readline-sync';
 export class Tragamonedas {
     private nombre: string;
     private figuras: string[];
-    constructor(pNombre: string, pFiguras: string[]) {
+    private saldo:number;
+    constructor(pNombre: string, pFiguras: string[], pSaldo:number) {
         this.nombre = pNombre;
         this.figuras = pFiguras
+        this.saldo=pSaldo;
+    }
+    getSaldo(){
+        return this.saldo;
     }
 
     public random(): string {
@@ -24,7 +29,7 @@ export class Tragamonedas {
     }
 
     public calcularResultado(resultado: string[]): void {
-    let saldo =100
+
     let moneda:number=10
     let repetido = 0;
     for (let i = 0; i < resultado.length; i++) {
@@ -40,19 +45,30 @@ export class Tragamonedas {
     }
  
     if (repetido === 2) {
-        saldo = (moneda * 3) + saldo; 
-        console.log("Ganaste apuesta x 3", "Saldo = " +saldo)
+        this.saldo = (moneda * 3) + this.saldo; 
+        console.log("Ganaste apuesta x 3", "Saldo = " + this.getSaldo() )
         ;
     } else if (repetido === 3) {
-        saldo = (moneda * 5) + saldo;
-        console.log("Ganaste apuesta x 5", "Saldo = " +saldo);
+        this.saldo = (moneda * 5) + this.saldo;
+        console.log("Ganaste apuesta x 5", "Saldo = " +this.getSaldo());
     } else if (repetido === 4) {
-        saldo = (moneda * 10) + saldo;
+        this.saldo = (moneda * 10) + this.saldo;
         console.log("JACKPOT!!");
-        console.log("GANASTE APUESTA X 10", "Saldo = " +saldo);
+        console.log("GANASTE APUESTA X 10", "Saldo = " +this.getSaldo());
     } else {
-        saldo = saldo -moneda
-        console.log("Intenta de nuevo", "Saldo = " +saldo);
+        this.saldo = this.saldo -moneda;
+        console.log("Intenta de nuevo", "Saldo = " +this.getSaldo());
+    }
+}
+public jugar() {
+    let seguir = true;
+    while (seguir) {
+        this.calcularResultado(this.tirar());
+        const respuesta = rs.question("¿Quieres seguir jugando? (s/n): ");
+        if (respuesta === null || respuesta.toLowerCase() !== 's') {
+            seguir = false;
+            console.log("Gracias por jugar!");
+        }
     }
 }
 
