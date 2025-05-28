@@ -3,6 +3,7 @@ import { Casino } from "./casino";
 import { TragamonedasLogo } from "./tragamonedas1";
 import { TragamonedasNumeros } from "./tragamonedas2";
 let casino1 = new Casino("Casino 404");
+import { Ruleta } from "./ruleta";
 
 function elegirTarea() {    
     console.clear();
@@ -80,7 +81,8 @@ function submenuTragamonedas() {
 
 function jugarRuleta() {
     console.log("Has seleccionado jugar a la Ruleta.");
-    //Ruleta
+    const ruleta = new Ruleta(1000);
+    ruleta.jugar();
 }
 
 function jugarMayorMenor() {
@@ -92,14 +94,14 @@ function jugarTragamonedas1() {
    
     const tragamonedasF =  new TragamonedasLogo();
     tragamonedasF.jugar();
-    console.log("Has seleccionado jugar: "+this.nombre);
+    console.log("Has seleccionado jugar: ");
 }   
 
 function jugarTragamonedas2() {
     console.clear();
     const tragamonedasN =  new TragamonedasNumeros();
     tragamonedasN.jugar();
-    console.log("Has seleccionado jugar :" + this.nombre);
+    console.log("Has seleccionado jugar :");
 }   
 
 function salir() {

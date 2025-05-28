@@ -1,6 +1,6 @@
-import * as uk from 'readline-sync';
+import * as rs from 'readline-sync';
 
-class Ruleta {
+export class Ruleta {
     // Colores para la consola, ponemos el nombre del color + "texto a cambiar color " + reset (el reset, ejecuta el final del cambio de color!)
     private RESET = "\x1b[0m";
     private ROJO = "\x1b[31m";
@@ -27,7 +27,7 @@ class Ruleta {
 
         while (this.saldo > 0) {
             this.mostrarMenu();
-            const opcion = uk.question('Opcion: ');
+            const opcion = rs.question('Opcion: ');
             
             switch (opcion) {
                 //usamos los Break para cortar la ejecucion al seleccionar, salvo en opcion invalida, se va a repetir hasta seleccionar una opcion valida
@@ -60,7 +60,7 @@ class Ruleta {
         console.log(this.AZUL + '2. Color (rojo/negro)' + this.RESET);
         console.log(this.CIAN + '3. Par/Impar' + this.RESET);
 
-        const tipo = uk.question('Tipo de apuesta (1-3): ');
+        const tipo = rs.question('Tipo de apuesta (1-3): ');
         let opcion: string | number;
         let tipoApuesta: 'numero' | 'color' | 'par-impar';
         //el tipo de apuesta
@@ -68,7 +68,7 @@ class Ruleta {
         switch (tipo) {
             case '1':
                 tipoApuesta = 'numero';
-                opcion = uk.questionInt('Numero (0-36): ');
+                opcion = rs.questionInt('Numero (0-36): ');
                 if (opcion < 0 || opcion > 36) {
                     console.log('Número inválido. Debe ser entre 0 y 36');
                     return;
@@ -77,7 +77,7 @@ class Ruleta {
 
             case '2':
                 tipoApuesta = 'color';
-                opcion = uk.question('Color (rojo/negro): ').toLowerCase();
+                opcion = rs.question('Color (rojo/negro): ').toLowerCase();
                 if (opcion !== 'rojo' && opcion !== 'negro') {
                     //la opcion si o si tiene que se o negro o rojo, que son los colores de las ruletas, el verde se lo reserva la casa!
                     console.log('Color inválido. Debe ser "rojo" o "negro"');
@@ -87,7 +87,7 @@ class Ruleta {
 
             case '3':
                 tipoApuesta = 'par-impar';
-                opcion = uk.question('Par o impar: ').toLowerCase();
+                opcion = rs.question('Par o impar: ').toLowerCase();
                 if (opcion !== 'par' && opcion !== 'impar') {
                     //la opcion debe ser par o impar, si no, no podra continuar y volvera a preguntar
                     console.log('Opción inválida. Debe ser "par" o "impar"');
@@ -101,7 +101,7 @@ class Ruleta {
         }
 
         console.log(`Ingrese el monto a apostar (saldo disponible: $${this.saldo})`);
-        const monto = uk.questionFloat('Monto: ');
+        const monto = rs.questionFloat('Monto: ');
 
         if (monto <= 0 || monto > this.saldo) {
             //verificamos el monto de la apuesta , que no sea menor a 0 ni mayor al saldo actual
@@ -210,5 +210,3 @@ class Ruleta {
 }
 
 // Iniciar el juego
-const ruleta = new Ruleta(1000);
-ruleta.jugar();
