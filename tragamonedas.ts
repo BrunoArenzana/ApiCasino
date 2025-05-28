@@ -8,6 +8,9 @@ export class Tragamonedas {
         this.figuras = pFiguras
         this.saldo=pSaldo;
     }
+    getNombre(){
+        return this.nombre;
+    }
     getSaldo(){
         return this.saldo;
     }
@@ -23,7 +26,7 @@ export class Tragamonedas {
         const rodillo3 = this.random();
         const rodillo4 = this.random();
         const resultado = [rodillo1, rodillo2, rodillo3, rodillo4];
-        console.log(`< ${rodillo1} - ${rodillo2} - ${rodillo3} - ${rodillo4} >`);
+        console.log(`   < ${rodillo1} - ${rodillo2} - ${rodillo3} - ${rodillo4} >`);
 
         return resultado;
     }
@@ -63,9 +66,11 @@ export class Tragamonedas {
 public jugar() {
     let seguir = true;
     while (seguir) {
+        console.log("** Tragamonedas "+this.nombre+" **")
         this.calcularResultado(this.tirar());
-        const respuesta = rs.question("¿Quieres seguir jugando? (s/n): ");
-        if (respuesta === null || respuesta.toLowerCase() !== 's') {
+        const respuesta = rs.question("Presione enter para Seguir / Escriba SALIR para terminar: ");
+        console.clear()
+        if (respuesta === null || respuesta.toLowerCase() == 'salir') {
             seguir = false;
             console.log("Gracias por jugar!");
         }
