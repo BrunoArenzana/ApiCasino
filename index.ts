@@ -6,12 +6,12 @@ import { TragamonedasNumeros } from "./tragamonedas2";
 let casino1 = new Casino("Casino 404");
 
 import { Ruleta } from "./ruleta";
-let nombreJugador1 = rs.question("ingrese su nombre");
+let nombreJugador1 = rs.question("ingrese su nombre: ");
 let jugador1=new Jugador(nombreJugador1)
 
 function elegirTarea() {    
     console.clear();
-    console.log("* Bienvenidos al Casino " + casino1.getNombre());
+    console.log("* Bienvenidos "+jugador1.getName()+" al Casino " + casino1.getNombre());
     console.log("1- Comprar Saldo Tarjeta");
     console.log("2- Cambiar Saldo Tarjeta");
     console.log("3- Jugar");

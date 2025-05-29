@@ -1,4 +1,5 @@
 import * as rs from 'readline-sync';
+import * as fs from 'fs';
 export class Tragamonedas {
     private nombre: string;
     private figuras: string[];
@@ -30,10 +31,10 @@ export class Tragamonedas {
 
         return resultado;
     }
-
+   
     public calcularResultado(resultado: string[]): void {
 
-    let moneda:number=10
+    let moneda=rs.questionInt("ingrese monto a apostar: ");
     let repetido = 0;
     for (let i = 0; i < resultado.length; i++) {
         let contador = 0;
@@ -46,21 +47,22 @@ export class Tragamonedas {
             repetido = contador;
         }
     }
- 
-    if (repetido === 2) {
-        this.saldo = (moneda * 3) + this.saldo; 
-        console.log("Ganaste apuesta x 3", "Saldo = " + this.getSaldo() )
-        ;
-    } else if (repetido === 3) {
+
+   if (repetido === 3) {
         this.saldo = (moneda * 5) + this.saldo;
         console.log("Ganaste apuesta x 5", "Saldo = " +this.getSaldo());
+        fs.writeFileSync('saldo.txt', `${this.getSaldo()}`);
+        
+        
     } else if (repetido === 4) {
         this.saldo = (moneda * 10) + this.saldo;
         console.log("JACKPOT!!");
         console.log("GANASTE APUESTA X 10", "Saldo = " +this.getSaldo());
+        fs.writeFileSync('saldo.txt', `${this.getSaldo()}`);
     } else {
         this.saldo = this.saldo -moneda;
-        console.log("Intenta de nuevo", "Saldo = " +this.getSaldo());
+        console.log("No tuviste suerte. Intenta de nuevo", "Saldo = " + this.getSaldo())
+        fs.writeFileSync('saldo.txt', `${this.getSaldo()}`);
     }
 }
 public jugar() {
