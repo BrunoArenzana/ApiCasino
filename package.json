@@ -1,0 +1,19 @@
+{
+  "name": "apicasino",
+  "version": "1.0.0",
+  "description": "Final Cuatrimestre",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.15.24",
+    "@types/readline-sync": "^1.4.8"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
