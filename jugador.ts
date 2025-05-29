@@ -1,36 +1,77 @@
 import * as rs from 'readline-sync';
-export class Jugador{
+import * as fs from 'fs';
+export class Jugador {
     private name: string;
     private saldo: number;
     private saldoTarjeta: number;
-    private retirar:number;
+    private retirar: number;
+    
+    private static readonly ARCHIVO_SALDO = 'saldo.txt';
 
-    constructor(pName:string
-    ) {
+    constructor(pName: string) {
         this.name = pName;
-            }
+        this.saldo = 0;
+        this.saldoTarjeta = 0;
+        this.retirar = 0;
+        this.cargarSaldo();
+    }
 
-    getSaldo(){
-        return this.saldo;
+    // Método para guardar el saldo actual en el archivo
+    private guardarSaldo(): void {
+        try {
+            const datos = {
+                name: this.name,
+                saldo: this.saldo,
+                saldoTarjeta: this.saldoTarjeta
+            };
+            fs.writeFileSync(Jugador.ARCHIVO_SALDO, JSON.stringify(datos));
+        } catch (error) {
+            console.error('Error al guardar el saldo:', error);
+        }
     }
-    setSaldoTarj(){
-        let montoIngresado =rs.questionInt("Cuanto saldo quiere cargar?:")
+
+    // Método para cargar el saldo desde el archivo
+    private cargarSaldo(): void {
+        try {
+            if (fs.existsSync(Jugador.ARCHIVO_SALDO)) {
+                const datos = fs.readFileSync(Jugador.ARCHIVO_SALDO, 'utf-8');
+                if (datos) {
+                    const { name, saldo, saldoTarjeta } = JSON.parse(datos);
+                    this.name = name || this.name;
+                    this.saldo = saldo || 0;
+                    this.saldoTarjeta = saldoTarjeta || 0;
+                }
+            }
+        } catch (error) {
+            console.error('Error al cargar el saldo:', error);
+        }
+    }
+
+    setSaldoTarj() {
+        let montoIngresado = rs.questionInt("Cuánto saldo quiere cargar?: ");
         this.saldoTarjeta = montoIngresado * 3;
-        console.log("su creditos son: " + this.saldoTarjeta);
-        
+        console.log("Sus créditos son: " + this.saldoTarjeta);
+        this.guardarSaldo();
     }
-    retiraEfectivo(){
-        let retirar = this.getSaldoTarj()/3;
+
+    retiraEfectivo() {
+        let retirar = this.getSaldoTarj() / 3;
         this.saldo += retirar;
-        console.log("Retiraste"+this.retirar)
+        this.saldoTarjeta = 0;
+        console.log("Retiraste: " + retirar);
+        this.guardarSaldo();
     }
+
     getSaldoTarj() {
         return this.saldoTarjeta;
     }
+
     getName() {
         return this.name;
     }
-    setName(){
 
+    setName(pName: string) {
+        this.name = pName;
+        this.guardarSaldo();
     }
 }
