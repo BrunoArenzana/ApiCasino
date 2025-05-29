@@ -1,25 +1,29 @@
 import * as rs from "readline-sync";
 import { Casino } from "./casino";
+import { Jugador } from "./jugador";
 import { TragamonedasLogo } from "./tragamonedas1";
 import { TragamonedasNumeros } from "./tragamonedas2";
 let casino1 = new Casino("Casino 404");
+
 import { Ruleta } from "./ruleta";
+let nombreJugador1 = rs.question("ingrese su nombre");
+let jugador1=new Jugador(nombreJugador1)
 
 function elegirTarea() {    
     console.clear();
     console.log("* Bienvenidos al Casino " + casino1.getNombre());
-    console.log("1- Cargar créditos");
-    console.log("2- Cobrar créditos");
+    console.log("1- Comprar Saldo Tarjeta");
+    console.log("2- Cambiar Saldo Tarjeta");
     console.log("3- Jugar");
     console.log("4- Salir del Casino");
 }
 
 function opcion1() {
-    casino1.cargarCredito();
+    jugador1.setSaldoTarj();
 }
 
 function opcion2() {
-    casino1.recuperarCredito();
+    jugador1.retiraEfectivo();
 }
 
 function opcion3() {
