@@ -6,7 +6,7 @@ export class Jugador {
     private saldoTarjeta: number;
     private retirar: number;
     
-    private static readonly ARCHIVO_SALDO = 'saldo.txt';
+    private static ARCHIVO_SALDO = 'saldo.txt';
 
     constructor(pName: string) {
         this.name = pName;
@@ -16,23 +16,19 @@ export class Jugador {
         this.cargarSaldo();
     }
 
-    // Método para guardar el saldo actual en el archivo
     private guardarSaldo(): void {
-        try {
+    
             const datos = {
                 name: this.name,
                 saldo: this.saldo,
                 saldoTarjeta: this.saldoTarjeta
             };
             fs.writeFileSync(Jugador.ARCHIVO_SALDO, JSON.stringify(datos));
-        } catch (error) {
-            console.error('Error al guardar el saldo:', error);
-        }
     }
 
-    // Método para cargar el saldo desde el archivo
+
     private cargarSaldo(): void {
-        try {
+        
             if (fs.existsSync(Jugador.ARCHIVO_SALDO)) {
                 const datos = fs.readFileSync(Jugador.ARCHIVO_SALDO, 'utf-8');
                 if (datos) {
@@ -42,9 +38,7 @@ export class Jugador {
                     this.saldoTarjeta = saldoTarjeta || 0;
                 }
             }
-        } catch (error) {
-            console.error('Error al cargar el saldo:', error);
-        }
+      
     }
 
     setSaldoTarj() {

@@ -96,7 +96,7 @@ function jugarMayorMenor() {
 function jugarTragamonedas1() {
     console.clear();
    
-    const tragamonedasF =  new TragamonedasLogo();
+    const tragamonedasF =  new TragamonedasLogo(jugador1);
     tragamonedasF.jugar();
     console.log("Has seleccionado jugar: ");
 }   

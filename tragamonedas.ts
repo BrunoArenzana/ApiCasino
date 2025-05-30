@@ -1,9 +1,11 @@
 import * as rs from 'readline-sync';
 import * as fs from 'fs';
+import { Jugador } from './jugador';
 export class Tragamonedas {
     private nombre: string;
     private figuras: string[];
     private saldo:number;
+   
     constructor(pNombre: string, pFiguras: string[], pSaldo:number) {
         this.nombre = pNombre;
         this.figuras = pFiguras

@@ -1,7 +1,9 @@
+import { Jugador } from "./jugador";
 import { Tragamonedas } from "./tragamonedas";
 
 export class TragamonedasLogo extends Tragamonedas {
-  constructor() {
-    super("Logo", ["♠" , "♥",  "♦", "♣"],100);
+  private jugador:Jugador
+  constructor(jugador:Jugador) {
+    super("Logo", ["♠" , "♥",  "♦", "♣"],jugador.getSaldoTarj());
   }
 }
