@@ -2,8 +2,10 @@ import { Jugador } from "./jugador";
 import { Tragamonedas } from "./tragamonedas";
 
 export class TragamonedasLogo extends Tragamonedas {
-  private jugador:Jugador
-  constructor(jugador:Jugador) {
-    super("Logo", ["♠" , "♥",  "♦", "♣"],jugador.getSaldoTarj());
+  protected jugador: Jugador;
+
+  constructor(jugador: Jugador) {
+    super("","Logo", ["♠", "♥", "♦", "♣"], 10, 30);
+    this.jugador = jugador;
   }
 }

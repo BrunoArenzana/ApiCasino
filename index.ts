@@ -9,17 +9,17 @@ import { Ruleta } from "./ruleta";
 let nombreJugador1 = rs.question("ingrese su nombre: ");
 let jugador1=new Jugador(nombreJugador1)
 
-function elegirTarea() {    
+export function elegirTarea() {    
     console.clear();
-    console.log("* Bienvenidos "+jugador1.getName()+" al Casino " + casino1.getNombre());
+    console.log("* Bienvenido "+jugador1.getName()+" al Casino " + casino1.getNombre()+" *" );
     console.log("1- Comprar Saldo Tarjeta");
     console.log("2- Cambiar Saldo Tarjeta");
     console.log("3- Jugar");
     console.log("4- Salir del Casino");
 }
 
-function opcion1() {
-    jugador1.setSaldoTarj();
+export function opcion1() {
+    jugador1.setSaldoCarga();
 }
 
 function opcion2() {
@@ -74,7 +74,7 @@ function submenuTragamonedas() {
                 jugarTragamonedas2();
                 break;
             case 3:
-                salir = true;
+                 salir = true;
                 break;
             default:
                 console.log("Opción inválida. Intente de nuevo.");
@@ -96,23 +96,23 @@ function jugarMayorMenor() {
 function jugarTragamonedas1() {
     console.clear();
    
-    const tragamonedasF =  new TragamonedasLogo(jugador1);
+    const tragamonedasF =  new TragamonedasLogo(jugador1);//
     tragamonedasF.jugar();
-    console.log("Has seleccionado jugar: ");
+    console.log("Has seleccionado jugar: "+tragamonedasF.getNombre());
 }   
 
 function jugarTragamonedas2() {
     console.clear();
-    const tragamonedasN =  new TragamonedasNumeros();
+    const tragamonedasN =  new TragamonedasNumeros(jugador1);//
     tragamonedasN.jugar();
-    console.log("Has seleccionado jugar :");
+    console.log("Has seleccionado jugar :"+tragamonedasN.getNombre());
 }   
 
 function salir() {
     console.log("Gracias por Jugar en ." + casino1.getNombre());
 }
 
-function ejecutarMenu() {
+export function ejecutarMenu(){
     while (true) {
         elegirTarea();
         let opcion = rs.questionInt("Seleccionar Tarea (1-4): ");
