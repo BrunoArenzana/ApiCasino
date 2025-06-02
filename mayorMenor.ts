@@ -2,16 +2,17 @@ import * as rs from 'readline-sync';
 import { Carta, Mazo } from './mazoDeCartas';
 import { iApostar } from './iApostar';
 
-class MayorMenor implements iApostar {
+export class MayorMenor implements iApostar {
     //atributos----------------------------------
 private mazo: Mazo;
 private carta: Carta;
 saldo: number;
-apuesta: number;
+monto:number;
+//const apuesta: number;
 //constructor---------------------------------------
-constructor(pSaldo: number, pApuesta: number) {
+constructor(pSaldo: number) {
     this.saldo = pSaldo;
-    this.apuesta = pApuesta;
+    this.monto =rs.questionInt("ingrese monto a apostar: ");
     this.mazo = new Mazo();
     const cartaInicial = this.mazo.sacarCartaAleatoria();
     this.carta = cartaInicial ?? new Carta("A", "♠");
@@ -23,10 +24,10 @@ constructor(pSaldo: number, pApuesta: number) {
         
     }
     sumarSaldo(): void {
-        this.saldo += this.apuesta;
+    this.saldo += this.monto;
     }
     restarSaldo(): void {
-        this.saldo -= this.apuesta;
+        this.saldo -= this.monto;
     }
 
 private mostrarCartaActual() {
@@ -44,6 +45,8 @@ private pedirApuesta(): "mayor" | "menor"{
     }
     }
 }
+        
+       // const monto = rs.questionFloat('Monto: ');
 //juego
 private jugarTurno(apuesta: "mayor" | "menor"): boolean {
     const nuevaCarta = this.mazo.sacarCartaAleatoria();
@@ -61,7 +64,7 @@ private jugarTurno(apuesta: "mayor" | "menor"): boolean {
     if (gano) {
     console.log(`Ganaste. La carta es ${nuevaCarta.toString()}`);
     this.sumarSaldo();
-    console.log(`Has ganado ${this.apuesta}`);
+    console.log(`Has ganado ${this.monto}`);
     
     } else {
     console.log(`Perdiste. La carta es ${nuevaCarta.toString()}`);
@@ -93,5 +96,3 @@ public jugar() {
     }
 }
 }
-const mayorOmenor= new MayorMenor(100,10)
-mayorOmenor.jugar()
