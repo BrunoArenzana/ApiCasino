@@ -41,7 +41,7 @@ export class Tragamonedas extends Jugador implements iApostar {
         apuesta = rs.questionInt(`La apuesta debe ser entre ${this.apuestaMinima} y ${this.apuestaMaxima}. Intenta nuevamente: `);
     }
     this.apuesta = apuesta;
-}
+    }
 
 
     public random(): string {
