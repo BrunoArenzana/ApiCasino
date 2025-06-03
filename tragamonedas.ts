@@ -32,22 +32,17 @@ export class Tragamonedas extends Jugador implements iApostar {
     }
 
     apuestaMinimaMaxima(): void {
-        if (this.getSaldoTarj() < this.apuestaMinima) {
-            console.log("No tiene saldo suficiente, debe comprar mas saldo");
-
-            opcion1()
-
-            let apuesta: number | void = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
-
-            while (apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima) {
-
-                apuesta = rs.questionInt(`La apuesta debe ser entre ${this.apuestaMinima} y ${this.apuestaMaxima}. Intenta nuevamente: `);
-            }
-
-            this.apuesta = apuesta;
-
-        }
+    if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
+        console.log("No tiene saldo suficiente, debe comprar más saldo");
+        opcion1();
     }
+    let apuesta: number = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
+    while (apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || isNaN(apuesta)) {
+        apuesta = rs.questionInt(`La apuesta debe ser entre ${this.apuestaMinima} y ${this.apuestaMaxima}. Intenta nuevamente: `);
+    }
+    this.apuesta = apuesta;
+}
+
 
     public random(): string {
         const i = Math.floor(Math.random() * this.figuras.length);
@@ -77,21 +72,21 @@ export class Tragamonedas extends Jugador implements iApostar {
         let nuevoSaldo: number;
         if (repetido === 3) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 5)
-            console.log("Ganaste apuesta x 5", "Saldo = " );
-        
+            console.log("Ganaste apuesta x 5");
+
         } else if (repetido === 4) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 10)
-                    console.log("JACKPOT!!");
-        console.log("GANASTE APUESTA X 10", "Saldo = " );
+            console.log("JACKPOT!!");
+            console.log("GANASTE APUESTA X 10");
 
         } else {
-          nuevoSaldo = this.jugador.getSaldoTarj() - this.apuesta;
-          console.log("No tuviste suerte. Intenta de nuevo", "Saldo = ")
-    
+            nuevoSaldo = this.jugador.getSaldoTarj() - this.apuesta;
+            console.log("No tuviste suerte. Intenta de nuevo")
+
         }
-       
+
         this.jugador.setSaldo(nuevoSaldo);
-        console.log("saldo actual"+ this.jugador.getSaldoTarj())
+        console.log("Saldo actual: " + this.jugador.getSaldoTarj())
         fs.writeFileSync('saldo.txt', `${this.jugador.getSaldoTarj()}`);
 
     }
