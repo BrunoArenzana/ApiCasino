@@ -4,7 +4,6 @@ import { iApostar } from './iApostar';
 import { opcion1 } from '.';
 import { Jugador } from "./jugador";
 
-
 export class Tragamonedas extends Jugador implements iApostar {
     private nombre: string;
     private figuras: string[];
@@ -12,7 +11,7 @@ export class Tragamonedas extends Jugador implements iApostar {
     public apuesta: number;
     private apuestaMinima: number;
     private apuestaMaxima: number;
-    protected jugador: Jugador;
+    protected jugador!: Jugador;
 
 
 

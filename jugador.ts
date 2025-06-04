@@ -62,7 +62,10 @@ export class Jugador {
         console.log("Retiraste: " + retirar);
         this.guardarSaldo();
     }
-
+    modificarSaldoTarj(cantidad: number) {
+        this.saldoTarjeta += cantidad;
+    this.guardarSaldo();
+}
     getSaldoTarj() {
         return this.saldoTarjeta;
     }
@@ -76,3 +79,4 @@ export class Jugador {
         this.guardarSaldo();
     }
 }
+
