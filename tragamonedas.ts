@@ -1,19 +1,47 @@
 import * as rs from 'readline-sync';
-export class Tragamonedas {
+import * as fs from 'fs';
+import { iApostar } from './iApostar';
+import { opcion1 } from '.';
+import { Jugador } from "./jugador";
+
+export class Tragamonedas extends Jugador implements iApostar {
     private nombre: string;
     private figuras: string[];
-    private saldo:number;
-    constructor(pNombre: string, pFiguras: string[], pSaldo:number) {
+
+    public apuesta: number;
+    private apuestaMinima: number;
+    private apuestaMaxima: number;
+    protected jugador!: Jugador;
+
+
+
+
+    constructor(pName: string, pNombre: string, pFiguras: string[], pApuestaMinima: number, pApuestaMaxima: number) {
+        super(pName)
         this.nombre = pNombre;
-        this.figuras = pFiguras
-        this.saldo=pSaldo;
+        this.figuras = pFiguras;
+        this.apuesta = 0;
+        this.apuestaMinima = pApuestaMinima;
+        this.apuestaMaxima = pApuestaMaxima;
+
     }
-    getNombre(){
+
+    getNombre() {
         return this.nombre;
     }
-    getSaldo(){
-        return this.saldo;
+
+    apuestaMinimaMaxima(): void {
+    if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
+        console.log("No tiene saldo suficiente, debe comprar más saldo");
+        opcion1();
     }
+    let apuesta: number = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
+    while (apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || isNaN(apuesta)) {
+        apuesta = rs.questionInt(`La apuesta debe ser entre ${this.apuestaMinima} y ${this.apuestaMaxima}. Intenta nuevamente: `);
+    }
+    this.apuesta = apuesta;
+    }
+
 
     public random(): string {
         const i = Math.floor(Math.random() * this.figuras.length);
@@ -21,60 +49,64 @@ export class Tragamonedas {
     }
 
     public tirar(): string[] {
-        const rodillo1 = this.random();
-        const rodillo2 = this.random();
-        const rodillo3 = this.random();
-        const rodillo4 = this.random();
-        const resultado = [rodillo1, rodillo2, rodillo3, rodillo4];
-        console.log(`   < ${rodillo1} - ${rodillo2} - ${rodillo3} - ${rodillo4} >`);
-
+        const resultado = [this.random(), this.random(), this.random(), this.random()];
+        console.log(`   < ${resultado.join(" - ")} >`);
         return resultado;
     }
 
     public calcularResultado(resultado: string[]): void {
-
-    let moneda:number=10
-    let repetido = 0;
-    for (let i = 0; i < resultado.length; i++) {
-        let contador = 0;
-        for (let j = 0; j < resultado.length; j++) {
-            if (resultado[i] === resultado[j]) {
-                contador++;
+        let repetido = 0;
+        for (let i = 0; i < resultado.length; i++) {
+            let contador = 0;
+            for (let j = 0; j < resultado.length; j++) {
+                if (resultado[i] === resultado[j]) {
+                    contador++;
+                }
+            }
+            if (contador > repetido) {
+                repetido = contador;
             }
         }
-        if (contador > repetido) {
-            repetido = contador;
-        }
-    }
- 
-    if (repetido === 2) {
-        this.saldo = (moneda * 3) + this.saldo; 
-        console.log("Ganaste apuesta x 3", "Saldo = " + this.getSaldo() )
-        ;
-    } else if (repetido === 3) {
-        this.saldo = (moneda * 5) + this.saldo;
-        console.log("Ganaste apuesta x 5", "Saldo = " +this.getSaldo());
-    } else if (repetido === 4) {
-        this.saldo = (moneda * 10) + this.saldo;
-        console.log("JACKPOT!!");
-        console.log("GANASTE APUESTA X 10", "Saldo = " +this.getSaldo());
-    } else {
-        this.saldo = this.saldo -moneda;
-        console.log("Intenta de nuevo", "Saldo = " +this.getSaldo());
-    }
-}
-public jugar() {
-    let seguir = true;
-    while (seguir) {
-        console.log("** Tragamonedas "+this.nombre+" **")
-        this.calcularResultado(this.tirar());
-        const respuesta = rs.question("Presione enter para Seguir / Escriba SALIR para terminar: ");
-        console.clear()
-        if (respuesta === null || respuesta.toLowerCase() == 'salir') {
-            seguir = false;
-            console.log("Gracias por jugar!");
-        }
-    }
-}
 
+        let nuevoSaldo: number;
+        if (repetido === 3) {
+            nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 5)
+            console.log("Ganaste apuesta x 5");
+
+        } else if (repetido === 4) {
+            nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 10)
+            console.log("JACKPOT!!");
+            console.log("GANASTE APUESTA X 10");
+
+        } else {
+            nuevoSaldo = this.jugador.getSaldoTarj() - this.apuesta;
+            console.log("No tuviste suerte. Intenta de nuevo")
+
+        }
+
+        this.jugador.setSaldo(nuevoSaldo);
+        console.log("Saldo actual: " + this.jugador.getSaldoTarj())
+        fs.writeFileSync('saldo.txt', `${this.jugador.getSaldoTarj()}`);
+
+    }
+
+    public jugar() {
+        let seguir = true;
+        while (seguir) {
+            console.log("** Tragamonedas " + this.nombre + " **");
+
+            this.apuestaMinimaMaxima();
+
+            const resultado = this.tirar();
+            this.calcularResultado(resultado);
+
+            const respuesta = rs.question("Presione enter para Seguir / Escriba SALIR para terminar: ");
+            console.clear();
+            if (respuesta === null || respuesta.toLowerCase() == 'salir') {
+                seguir = false;
+                console.log("¡Gracias por jugar!");
+            }
+
+        }
+    }
 }

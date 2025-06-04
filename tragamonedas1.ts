@@ -1,7 +1,11 @@
+import { Jugador } from "./jugador";
 import { Tragamonedas } from "./tragamonedas";
 
 export class TragamonedasLogo extends Tragamonedas {
-  constructor() {
-    super("Logo", ["♠" , "♥",  "♦", "♣"],100);
+  protected jugador: Jugador;
+
+  constructor(jugador: Jugador) {
+    super("","Logo", ["♠", "♥", "♦", "♣"], 10, 30);
+    this.jugador = jugador;
   }
 }

@@ -1,7 +1,12 @@
+import { Jugador } from "./jugador";
 import { Tragamonedas } from "./tragamonedas";
-export class TragamonedasNumeros extends Tragamonedas{
-  constructor() {
-    super("Numeros", ["1", "2", "3", "4", "5", "6"],100);
+
+export class TragamonedasNumeros extends Tragamonedas {
+  protected jugador: Jugador;
+
+  constructor(jugador: Jugador) {
+    super("","Logo", ["1", "2", "3", "4"],15, 35);
+    this.jugador = jugador;
   }
 }
 
