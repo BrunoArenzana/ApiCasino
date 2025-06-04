@@ -88,7 +88,7 @@ function submenuTragamonedas() {
 
 function jugarRuleta() {
     console.log("Has seleccionado jugar a la Ruleta.");
-    const ruleta = new Ruleta(1000);
+    const ruleta = new Ruleta(jugador1);
     ruleta.jugar();
 }
 
