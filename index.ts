@@ -3,9 +3,12 @@ import { Casino } from "./casino";
 import { Jugador } from "./jugador";
 import { TragamonedasLogo } from "./tragamonedas1";
 import { TragamonedasNumeros } from "./tragamonedas2";
+import { MayorMenor } from './mayorMenor';
+
 let casino1 = new Casino("Casino 404");
 
 import { Ruleta } from "./ruleta";
+import { log } from "console";
 let nombreJugador1 = rs.question("ingrese su nombre: ");
 let jugador1=new Jugador(nombreJugador1)
 
@@ -74,7 +77,7 @@ function submenuTragamonedas() {
                 jugarTragamonedas2();
                 break;
             case 3:
-                 salir = true;
+                salir = true;
                 break;
             default:
                 console.log("Opción inválida. Intente de nuevo.");
@@ -91,7 +94,8 @@ function jugarRuleta() {
 
 function jugarMayorMenor() {
     console.log("Has seleccionado jugar a Mayor/Menor.");
-    //mayor y menor
+    const juegoMayorMenor = new MayorMenor(jugador1, 10, 500);
+    juegoMayorMenor.jugar();
 }
 function jugarTragamonedas1() {
     console.clear();
