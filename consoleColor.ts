@@ -7,12 +7,4 @@ export enum ConsoleColor {
     Magenta = "\x1b[35m",
     Reset = "\x1b[0m"
 }
-
-    /* modo de uso estructura -
-    console.log(ConsoleColor.Red + "Texto en rojo" + ConsoleColor.Reset);
-    */
-
-
-
-
-// 
+//console.log(ConsoleColor.Red + "texto a colorear"+ ConsoleColor.Reset);
