@@ -112,6 +112,7 @@ private jugarTurno(apuesta: "mayor" | "menor"): boolean {
     //this.modificarSaldoTarj(this.getSaldoTarj()-this.apuesta);
     console.log(`Perdiste. La carta es ${nuevaCarta.toString()}`);
     const nuevoSaldo= this.jugador.getSaldoTarj() - this.apuesta;
+    this.jugador.setSaldo(nuevoSaldo);
     }
 console.log(`Tu saldo actual es: ${this.jugador.getSaldoTarj()}`);
 fs.writeFileSync('saldo.txt', `${this.jugador.getSaldoTarj()}`);
