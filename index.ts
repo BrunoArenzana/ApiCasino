@@ -4,6 +4,8 @@ import { Jugador } from "./jugador";
 import { TragamonedasLogo } from "./tragamonedas1";
 import { TragamonedasNumeros } from "./tragamonedas2";
 import { MayorMenor } from './mayorMenor';
+import { ConsoleColor } from './consoleColor';
+
 
 let casino1 = new Casino("Casino 404");
 
