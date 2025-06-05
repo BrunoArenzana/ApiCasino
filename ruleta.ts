@@ -2,19 +2,10 @@ import * as rs from 'readline-sync';
 import { Jugador } from './jugador';
 import { iApostar } from './iApostar';
 import { opcion1 } from '.';
-import * as fs from 'fs'; //adapter mediante un interface
-
+import * as fs from 'fs';
 
 export class Ruleta implements iApostar {
-    // Colores para la consola, ponemos el nombre del color + "texto a cambiar color " + reset (el reset, ejecuta el final del cambio de color!)
-    private RESET = "\x1b[0m";
-    private ROJO = "\x1b[31m";
-    private VERDE = "\x1b[32m";
-    private AMARILLO = "\x1b[33m";
-    private AZUL = "\x1b[34m";
-    private MAGENTA = "\x1b[35m";
-    private CIAN = "\x1b[36m";
-
+   
     // propios de nuestra ruleta
     private saldo: number;
     private rojos = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]; // Guardo los rojos en un arreglo (buscado en "https://www.casino.es/ruleta/como-jugar-ruleta/")
@@ -129,7 +120,7 @@ export class Ruleta implements iApostar {
         console.log(`Ingrese el monto a apostar (saldo disponible: $${this.saldo-montoActualizado})`);
         const monto = rs.questionFloat('Monto: ');
 
-        if (monto <= this.apuestaMinima || monto > this.saldo - montoActualizado || monto>=this.apuestaMaxima) {
+        if (monto < this.apuestaMinima || monto > this.saldo - montoActualizado || monto>this.apuestaMaxima) {
             
             //verificamos el monto de la apuesta , que no sea menor a 0 ni mayor al saldo actual
             console.log(`Monto inválido. La apuesta minima es de ${this.apuestaMinima}, la maxima es de ${this.apuestaMaxima} y no mayor a su saldo`);
