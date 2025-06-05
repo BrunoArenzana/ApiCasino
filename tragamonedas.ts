@@ -11,13 +11,13 @@ export class Tragamonedas  implements iApostar {
     public apuesta: number;
     private apuestaMinima: number;
     private apuestaMaxima: number;
-    protected jugador!: Jugador;
+    protected jugador: Jugador;
 
 
 
 
     constructor(pName: string, pNombre: string, pFiguras: string[], pApuestaMinima: number, pApuestaMaxima: number) {
-        //super(pName)
+   
         this.nombre = pNombre;
         this.figuras = pFiguras;
         this.apuesta = 0;
