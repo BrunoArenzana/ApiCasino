@@ -10,7 +10,7 @@ let casino1 = new Casino("Casino 404");
 import { Ruleta } from "./ruleta";
 import { log } from "console";
 let nombreJugador1 = rs.question("ingrese su nombre: ");
-let jugador1=new Jugador(nombreJugador1)
+const jugador1 = Jugador.getInstance(nombreJugador1);
 
 export function elegirTarea() {    
     console.clear();

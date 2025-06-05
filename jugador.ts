@@ -1,6 +1,7 @@
 import * as rs from 'readline-sync';
 import * as fs from 'fs';
 export class Jugador {
+    private static inst: Jugador;
     private name: string;
     private saldo: number;
     private saldoTarjeta: number;
@@ -13,6 +14,12 @@ export class Jugador {
         this.saldo = 0;
         this.saldoTarjeta = 0;
         this.retirar = 0;
+    }
+    static getInstance(name: string = ""): Jugador {
+        if (!Jugador.inst) {
+            Jugador.inst = new Jugador(name);
+        }
+        return Jugador.inst;
     }
 
     private guardarSaldo(): void {
@@ -64,7 +71,7 @@ export class Jugador {
     }
     modificarSaldoTarj(cantidad: number) {
         this.saldoTarjeta += cantidad;
-    this.guardarSaldo();
+    //this.guardarSaldo();
 }
     getSaldoTarj() {
         return this.saldoTarjeta;
