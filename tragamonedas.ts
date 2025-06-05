@@ -4,7 +4,7 @@ import { iApostar } from './iApostar';
 import { opcion1 } from '.';
 import { Jugador } from "./jugador";
 
-export class Tragamonedas extends Jugador implements iApostar {
+export class Tragamonedas  implements iApostar {
     private nombre: string;
     private figuras: string[];
 
@@ -17,7 +17,7 @@ export class Tragamonedas extends Jugador implements iApostar {
 
 
     constructor(pName: string, pNombre: string, pFiguras: string[], pApuestaMinima: number, pApuestaMaxima: number) {
-        super(pName)
+        //super(pName)
         this.nombre = pNombre;
         this.figuras = pFiguras;
         this.apuesta = 0;
