@@ -5,10 +5,10 @@ import { iApostar } from './iApostar';
 import { Jugador } from "./jugador";
 import { opcion1 } from '.';
 import { Juegos } from "./juegos";
-import {  } from "./";
+import { ConsoleColor } from "./ConsoleColor";
 
 export class MayorMenor extends Juegos implements iApostar {
-    //atributos----------------------------------
+    //atributos---------------------------------------------------------------
 protected jugador:Jugador;
 private mazo: Mazo;
 private carta: Carta;
@@ -16,62 +16,51 @@ private apuestaMinima:number;
 private apuestaMaxima:number;
 public apuesta:number;
 public saldo1:number;
-//private saldo: number;
-//monto:number;
 
-//const apuesta: number;
-//constructor---------------------------------------
+//constructor-----------------------------------------------------------------
 constructor(pJugador:Jugador, pApuestaMinima: number, pApuestaMaxima: number ) {
     super();
     this.jugador=pJugador;
     this.saldo1= this.jugador.getSaldoTarj();
-    //this.jugador = pJugador;
     this.apuestaMinima = pApuestaMinima;
     this.apuestaMaxima = pApuestaMaxima;
-    //this.saldo = pSaldo;
-    //this.monto =rs.questionInt("ingrese monto a apostar: ");
     this.apuesta = 0
     this.mazo = new Mazo();
     const cartaInicial = this.mazo.sacarCartaAleatoria();
     this.carta = cartaInicial ?? new Carta("A", "♠");
 }
-
-//----------------metodos de interface-------------------------
-    /*calcularGanancia(): number {//este metodo no tiene ninguna funcion de momento, puede ser borrado o darle alguna funcion util, de momento no le encontre utilidad
-        throw console.error("el q lee es gay");
-        
-    }*/
-    /*sumarSaldo(): void {
-    this.saldo += this.monto;
-    }
-    restarSaldo(): void {
-    this.saldo -= this.monto;
-    }*/
+//-------------------------metodos de interface-------------------------------
     apuestaMinimaMaxima(): void {
         let saldo= this.jugador.getSaldoTarj();
         if(saldo < this.apuestaMinima){
-        console.log("No tiene saldo suficiente, debe comprar mas salod");
+        console.log("No tiene saldo suficiente, debe comprar mas saldo");
         opcion1();
         saldo = this.jugador.getSaldoTarj();
-        /*if (saldo < this.apuestaMinima) {
-        console.log("Saldo insuficiente para jugar. Volviendo al menú principal.");
-        return;
-    }*/
+        if(saldo < this.apuestaMinima){
+            console.log("No tiene saldo suficiente, debe comprar mas saldo");
+            opcion1();
+            return;
         }
+        }
+        console.clear();
+        console.log(`Su saldo actual es de: ${this.jugador.getSaldoTarj()}`);
                 let apuesta: number | void = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
                 while (apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima){
-    
         apuesta = rs.questionInt(`La apuesta debe ser entre ${this.apuestaMinima} y ${this.apuestaMaxima}. Intenta nuevamente: `);
     }
-    this.apuesta = apuesta;
-    
+    if(apuesta > saldo){
+        console.log("No tiene saldo suficiente para realizar esta apuesta, por favor cargue saldo para seguir jugando");
+        opcion1();
+        console.clear();
+        return;
     }
-
+    this.apuesta = apuesta;
+    }
 
 private mostrarCartaActual() {
     console.log(`Carta actual: ${this.carta.toString()}`);
 }
-//------------metodos--------------------------------------------
+//------------metodos----------------------------------------------
 terminarJuego(): void {
     
 }
@@ -86,7 +75,6 @@ private pedirApuesta(): "mayor" | "menor"{
     }
     }
 }
-       // const monto = rs.questionFloat('Monto: ');
 //juego
 private jugarTurno(apuesta: "mayor" | "menor"): boolean {
     const nuevaCarta = this.mazo.sacarCartaAleatoria();
@@ -116,9 +104,10 @@ private jugarTurno(apuesta: "mayor" | "menor"): boolean {
     }
 console.log(`Tu saldo actual es: ${this.jugador.getSaldoTarj()}`);
 fs.writeFileSync('saldo.txt', `${this.jugador.getSaldoTarj()}`);
+//this.jugador.guardarSaldo();
 return true;
 }
-//metodo final, juego con menu
+//metodo final
 public jugar() {
     let seguir = true;
     console.log("Bienvenido al juego Mayor o Menor!");
@@ -127,6 +116,7 @@ public jugar() {
     while (true) {
     this.mostrarCartaActual();
     const apuesta = this.pedirApuesta();
+
     seguir = this.jugarTurno(apuesta);
 
     if (!seguir){
@@ -140,8 +130,12 @@ public jugar() {
         console.log("Gracias por jugar!");
         return ;
     }
+    let saldo = this.jugador.getSaldoTarj();
+    if(saldo < this.apuestaMinima/*||apuesta > this.jugador.getSaldoTarj()*/){
+        console.log("No tienes saldo suficiente para realizar la apuesta, elige otra apuesta o haz una recarga en el menu");
+        return;
+    }
+    //this.apuestaMinimaMaxima();
     }
 }
 }
-//const jugador1 = new Jugador("Pepe")
-//const MayorMenor1= new MayorMenor(jugador1,10,500);
