@@ -5,6 +5,7 @@ import { TragamonedasLogo } from "./tragamonedas1";
 import { TragamonedasNumeros } from "./tragamonedas2";
 import { MayorMenor } from './mayorMenor';
 
+
 let casino1 = new Casino("Casino 404");
 
 import { Ruleta } from "./ruleta";
@@ -39,6 +40,7 @@ function opcion3() {
         console.log("3- Jugar Tragamonedas");
         console.log("4- Volver al Menú Principal");
 
+
         let opcionJuego = rs.questionInt("Seleccionar juego (1-4): ");
         switch (opcionJuego) {
             case 1:
@@ -50,9 +52,10 @@ function opcion3() {
             case 3:
                 submenuTragamonedas();
                 break;
-            case 4:
-                salir = true;
+                case 4:
+                    salir=true
                 break;
+        //saldo = this.jugador.getSaldoTarj();
             default:
                 console.log("Opción inválida. Intente de nuevo.");
         }
@@ -131,8 +134,16 @@ export function ejecutarMenu(){
                 opcion3();
                 break;
             case 4:
-                salir();
-                return;
+                const respuesta = rs.question(`Escriba "salir" para salir del casino, de lo contrario, presione enter para continuar: `);
+                console.clear();
+                if (respuesta === null || respuesta.toLowerCase() == 'salir') {
+                if(jugador1.getSaldoTarj()>0){
+                    console.log("Aun quedan creditos en su tarjeta, retirelos para poder salir del casino, gracias.");
+                    rs.question("presione enter")
+                }else{
+                    salir();
+                    return;
+                }}
             default:
                 console.log("Opción inválida. Por favor, selecciona un número entre 1 y 4.");
         }
