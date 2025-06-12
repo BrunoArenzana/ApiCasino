@@ -7,7 +7,7 @@ export class Jugador {
     private saldo: number;
     private saldoTarjeta: number;
     private retirar: number;
-    protected jugador:Jugador;
+    //protected jugador:Jugador;
 
     private static ARCHIVO_SALDO = 'saldo.txt';
 
@@ -61,6 +61,7 @@ export class Jugador {
         console.log("Retiraste: " + retirar);
         console.log("gracias por jugar")
         //
+        rs.questionInt("Presione enter para continuar")
         process.exit
 
     }

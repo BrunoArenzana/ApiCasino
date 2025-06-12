@@ -3,9 +3,9 @@ import * as fs from 'fs';
 import { iApostar } from './iApostar';
 import { opcion1 } from '.';
 import { Jugador } from "./jugador";
-import { ejecutarMenu } from '.';   
+import { ejecutarMenu } from '.';
 
-export class Tragamonedas  implements iApostar {
+export class Tragamonedas implements iApostar {
     private nombre: string;
     private figuras: string[];
 
@@ -18,7 +18,7 @@ export class Tragamonedas  implements iApostar {
 
 
     constructor(pName: string, pNombre: string, pFiguras: string[], pApuestaMinima: number, pApuestaMaxima: number) {
-   
+
         this.nombre = pNombre;
         this.figuras = pFiguras;
         this.apuesta = 0;
@@ -31,7 +31,7 @@ export class Tragamonedas  implements iApostar {
         return this.nombre;
     }
 
-apuestaMinimaMaxima(): void {
+    apuestaMinimaMaxima(): void {
         if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
             console.log("No tiene saldo suficiente, debe comprar más saldo");
             ejecutarMenu();
