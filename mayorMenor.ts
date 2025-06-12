@@ -33,15 +33,15 @@ constructor(pJugador:Jugador, pApuestaMinima: number, pApuestaMaxima: number ) {
     apuestaMinimaMaxima(): void {
         let saldo= this.jugador.getSaldoTarj();
         if(saldo < this.apuestaMinima){
-        console.log("No tiene saldo suficiente, debe comprar mas saldo");
+        console.log(`No tiene saldo suficiente, debe comprar mas saldo`);
         opcion1();
         saldo = this.jugador.getSaldoTarj();
         if(saldo < this.apuestaMinima){
-            console.log("No tiene saldo suficiente, debe comprar mas saldo");
+            console.log(`No tiene saldo suficiente, debe comprar mas saldo`);
             opcion1();
             return;
         }
-        }
+        }//console.log(this.ROJO + '\n=== MENU PRINCIPAL ===' + this.RESET);
         console.clear();
         console.log(`Su saldo actual es de: ${this.jugador.getSaldoTarj()}`);
                 let apuesta: number | void = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
@@ -49,7 +49,7 @@ constructor(pJugador:Jugador, pApuestaMinima: number, pApuestaMaxima: number ) {
         apuesta = rs.questionInt(`La apuesta debe ser entre ${this.apuestaMinima} y ${this.apuestaMaxima}. Intenta nuevamente: `);
     }
     if(apuesta > saldo){
-        console.log("No tiene saldo suficiente para realizar esta apuesta, por favor cargue saldo para seguir jugando");
+        console.log(`No tiene saldo suficiente para realizar esta apuesta, por favor cargue saldo para seguir jugando`);
         opcion1();
         console.clear();
         return;
