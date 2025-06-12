@@ -23,17 +23,6 @@ export class Jugador {
         return Jugador.inst;
     }
 
-    private guardarSaldo(): void {
-
-        const datos = {
-            name: this.name,
-            saldo: this.saldo,
-            saldoTarjeta: this.saldoTarjeta
-        };
-        fs.writeFileSync(Jugador.ARCHIVO_SALDO, JSON.stringify(datos));
-    }
-
-
     private cargarSaldo(): void {
 
         if (fs.existsSync(Jugador.ARCHIVO_SALDO)) {
@@ -61,6 +50,7 @@ export class Jugador {
         this.guardarSaldo();
         
     }
+
     private guardarSaldo(): void {
     fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`);
     rs.question("presione unta tecla para ir a Juegos")

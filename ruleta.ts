@@ -3,7 +3,8 @@ import { Jugador } from './jugador';
 import { iApostar } from './iApostar';
 import { opcion1 } from '.';
 import * as fs from 'fs';
-import { ConsoleColor } from './consoleColor';
+import { ConsoleColor } from './ConsoleColor';
+
 
 
 
