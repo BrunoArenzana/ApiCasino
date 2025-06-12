@@ -21,7 +21,6 @@ export function elegirTarea() {
     console.log("3- Jugar");
     console.log("4- Salir del Casino");
 }
-
 export function opcion1() {
     jugador1.setSaldoCarga();
 }
@@ -102,7 +101,6 @@ function jugarMayorMenor() {
 }
 function jugarTragamonedas1() {
     console.clear();
-   
     const tragamonedasF =  new TragamonedasLogo(jugador1);//
     tragamonedasF.jugar();
     console.log("Has seleccionado jugar: "+tragamonedasF.getNombre());
