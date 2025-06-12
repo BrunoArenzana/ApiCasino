@@ -7,8 +7,6 @@ export class Jugador {
     private saldo: number;
     private saldoTarjeta: number;
     private retirar: number;
-    //protected jugador:Jugador;
-
     private static ARCHIVO_SALDO = 'saldo.txt';
     constructor(pName: string) {
         this.name = pName;
@@ -22,43 +20,29 @@ export class Jugador {
         }
         return Jugador.inst;
     }
-
-    private cargarSaldo(): void {
-
-        if (fs.existsSync(Jugador.ARCHIVO_SALDO)) {
-            const datos = fs.readFileSync(Jugador.ARCHIVO_SALDO, 'utf-8');
-            if (datos) {
-                //modificado antes de Karen
-                const { name,saldo, saldoTarjeta } = JSON.parse(datos);
-                this.name = name || this.name;
-                this.saldo = saldo || 0;
-                this.saldoTarjeta = saldoTarjeta || 0;
-            }
-        }
-
-    }
-
     setSaldoCarga() {
         let montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar?: ");
-        console.log(typeof(montoIngresado))
         while (montoIngresado < 100) {
             console.log("El monto no puede ser menor a 100");
-            montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar*******?: ");
+            montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar?: ");
         }
-        this.saldoTarjeta = montoIngresado * 3;
-        console.log("Sus créditos son: " + this.saldoTarjeta);
+        let saldoAnterior=fs.readFileSync('saldo.txt','utf-8')
+        let parsedSaldo=parseInt(saldoAnterior);
+        if(isNaN(parsedSaldo) || parsedSaldo===undefined){
+            parsedSaldo=0;
+        }
+        //---------------------------------
+        this.saldoTarjeta = (montoIngresado * 3) + parsedSaldo;
+        fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`)
+        console.log("Sus créditos son: "+this.getSaldoTarj());
         this.guardarSaldo();
-        
     }
-
     private guardarSaldo(): void {
     fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`);
     rs.question("presione unta tecla para ir a Juegos")
     opcion3()
-    
     }
-
-    setSaldo(pSaldo:number){
+    setSaldo(pSaldo:number):void{
         this.saldoTarjeta = pSaldo;
     }
     retiraEfectivo() {
