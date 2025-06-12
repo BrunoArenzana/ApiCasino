@@ -25,31 +25,28 @@ export class Jugador {
     }
 
     setSaldoCarga() {
-        //if undefine o number =0
+
         let montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar?: ");
-        console.log(typeof(montoIngresado))
         while (montoIngresado < 100) {
             console.log("El monto no puede ser menor a 100");
-            montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar*******?: ");
+            montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar?: ");
         }
         let saldoAnterior=fs.readFileSync('saldo.txt','utf-8')
         let parsedSaldo=parseInt(saldoAnterior);
-        if(isNaN(parsedSaldo)){
+        if(isNaN(parsedSaldo) || parsedSaldo===undefined){
             parsedSaldo=0;
-
         }
-        
-        console.log(parsedSaldo)
-        rs.question("tecla")
         //---------------------------------
         this.saldoTarjeta = (montoIngresado * 3) + parsedSaldo;
         fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`)
       
-        console.log("Sus créditos son: ");
+        console.log("Sus créditos son: "+this.getSaldoTarj());
         this.guardarSaldo();
+        
     }
     private guardarSaldo(): void {
     fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`);
+    rs.question("presione unta tecla para ir a Juegos")
     opcion3()
     }
 
