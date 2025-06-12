@@ -8,7 +8,6 @@ export class Jugador {
     private retirar: number;
 
     private static ARCHIVO_SALDO = 'saldo.txt';
-
     constructor(pName: string) {
         this.name = pName;
         this.saldo = 0;
@@ -21,45 +20,28 @@ export class Jugador {
         }
         return Jugador.inst;
     }
-
-    private guardarSaldo(): void {
-
-        const datos = {
-            name: this.name,
-            saldo: this.saldo,
-            saldoTarjeta: this.saldoTarjeta
-        };
-        fs.writeFileSync(Jugador.ARCHIVO_SALDO, JSON.stringify(datos));
-    }
-
-
-    private cargarSaldo(): void {
-
-        if (fs.existsSync(Jugador.ARCHIVO_SALDO)) {
-            const datos = fs.readFileSync(Jugador.ARCHIVO_SALDO, 'utf-8');
-            if (datos) {
-                //modificado antes de Karen
-                const { name,saldo, saldoTarjeta } = JSON.parse(datos);
-                this.name = name || this.name;
-                this.saldo = saldo || 0;
-                this.saldoTarjeta = saldoTarjeta || 0;
-            }
-        }
-
-    }
-
     setSaldoCarga() {
+        //if undefine o number =0
         let montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar?: ");
+        console.log(typeof(montoIngresado))
         while (montoIngresado < 100) {
             console.log("El monto no puede ser menor a 100");
-            montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar?: ");
+            montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar*******?: ");
         }
-        this.saldoTarjeta = montoIngresado * 3;
-        console.log("Sus créditos son: " + this.saldoTarjeta);
+        let saldoAnterior=fs.readFileSync('saldo.txt','utf-8')
+        let nuevoSaldo=parseInt(saldoAnterior);
+        console.log(nuevoSaldo)
+        rs.question("tecla")
+        //---------------------------------
+        this.saldoTarjeta = (montoIngresado * 3) + nuevoSaldo;
+        fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`)
+        console.log("Sus créditos son: ");
         this.guardarSaldo();
     }
-
-    setSaldo(pSaldo:number){
+    private guardarSaldo(): void {
+    fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`);
+    }
+    setSaldo(pSaldo:number):void{
         this.saldoTarjeta = pSaldo;
     }
     retiraEfectivo() {
@@ -68,6 +50,8 @@ export class Jugador {
         this.saldoTarjeta = 0;
         console.log("Retiraste: " + retirar);
         this.guardarSaldo();
+        rs.question("Presione enter")
+        
     }
     modificarSaldoTarj(cantidad: number) {
         this.saldoTarjeta += cantidad;
@@ -76,14 +60,11 @@ export class Jugador {
     getSaldoTarj() {
         return this.saldoTarjeta;
     }
-
     getName() {
         return this.name;
     }
-
     setName(pName: string) {
         this.name = pName;
         this.guardarSaldo();
     }
 }
-

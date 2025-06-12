@@ -5,7 +5,7 @@ export class TragamonedasNumeros extends Tragamonedas {
   protected jugador: Jugador;
 
   constructor(jugador: Jugador) {
-    super("","Logo", ["1", "2", "3", "4"],15, 35);
+    super("","Logo", ["1", "2", "3", "4"],50, 500);
     this.jugador = jugador;
   }
 }

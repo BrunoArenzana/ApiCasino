@@ -5,7 +5,7 @@ export class TragamonedasLogo extends Tragamonedas {
   protected jugador: Jugador;
 
   constructor(jugador: Jugador) {
-    super("","Logo", ["♠", "♥", "♦", "♣"], 10, 30);
+    super("","Logo", ["♠", "♥", "♦", "♣"], 300, 500);
     this.jugador = jugador;
   }
 }
