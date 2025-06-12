@@ -137,11 +137,12 @@ export function ejecutarMenu(){
                 if (respuesta === null || respuesta.toLowerCase() == 'salir') {
                 if(jugador1.getSaldoTarj()>0){
                     console.log("Aun quedan creditos en su tarjeta, retirelos para poder salir del casino, gracias.");
-                    rs.question("presione enter")
-                }else{
+                    rs.question("presione enter");
+                    opcion2();
+                    console.clear();
                     salir();
                     return;
-                }}
+}}
             default:
                 console.log("Opción inválida. Por favor, selecciona un número entre 1 y 4.");
         }
