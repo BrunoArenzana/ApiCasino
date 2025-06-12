@@ -48,6 +48,7 @@ export class Jugador {
     fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`);
     rs.question("presione unta tecla para ir a Juegos")
     opcion3()
+    
     }
 
     setSaldo(pSaldo:number):void{
@@ -58,7 +59,10 @@ export class Jugador {
         this.saldo += retirar;
         this.saldoTarjeta = 0;
         console.log("Retiraste: " + retirar);
-        this.guardarSaldo();
+        console.log("gracias por jugar")
+        //
+        process.exit
+
     }
     modificarSaldoTarj(cantidad: number) {
         this.saldoTarjeta += cantidad;

@@ -4,7 +4,6 @@ import { Jugador } from "./jugador";
 import { TragamonedasLogo } from "./tragamonedas1";
 import { TragamonedasNumeros } from "./tragamonedas2";
 import { MayorMenor } from './mayorMenor';
-import { ConsoleColor } from './consoleColor';
 
 
 let casino1 = new Casino("Casino 404");
@@ -41,6 +40,7 @@ export function opcion3() {
         console.log("3- Jugar Tragamonedas");
         console.log("4- Volver al Menú Principal");
 
+
         let opcionJuego = rs.questionInt("Seleccionar juego (1-4): ");
         switch (opcionJuego) {
             case 1:
@@ -52,9 +52,10 @@ export function opcion3() {
             case 3:
                 submenuTragamonedas();
                 break;
-            case 4:
-                salir = true;
+                case 4:
+                    salir=true
                 break;
+        //saldo = this.jugador.getSaldoTarj();
             default:
                 console.log("Opción inválida. Intente de nuevo.");
         }
@@ -96,28 +97,29 @@ function jugarRuleta() {
 
 function jugarMayorMenor() {
     console.log("Has seleccionado jugar a Mayor/Menor.");
-    //mayor y menor
+    const juegoMayorMenor = new MayorMenor(jugador1, 10, 500);
+    juegoMayorMenor.jugar();
 }
 function jugarTragamonedas1() {
     console.clear();
    
-    const tragamonedasF =  new TragamonedasLogo(jugador1);
+    const tragamonedasF =  new TragamonedasLogo(jugador1);//
     tragamonedasF.jugar();
-    console.log("Has seleccionado jugar: ");
+    console.log("Has seleccionado jugar: "+tragamonedasF.getNombre());
 }   
 
 function jugarTragamonedas2() {
     console.clear();
-    const tragamonedasN =  new TragamonedasNumeros(jugador1);
+    const tragamonedasN =  new TragamonedasNumeros(jugador1);//
     tragamonedasN.jugar();
-    console.log("Has seleccionado jugar :");
+    console.log("Has seleccionado jugar :"+tragamonedasN.getNombre());
 }   
 
 function salir() {
     console.log("Gracias por Jugar en ." + casino1.getNombre());
 }
 
-function ejecutarMenu() {
+export function ejecutarMenu(){
     while (true) {
         elegirTarea();
         let opcion = rs.questionInt("Seleccionar Tarea (1-4): ");
@@ -132,8 +134,16 @@ function ejecutarMenu() {
                 opcion3();
                 break;
             case 4:
-                salir();
-                return;
+                const respuesta = rs.question(`Escriba "salir" para salir del casino, de lo contrario, presione enter para continuar: `);
+                console.clear();
+                if (respuesta === null || respuesta.toLowerCase() == 'salir') {
+                if(jugador1.getSaldoTarj()>0){
+                    console.log("Aun quedan creditos en su tarjeta, retirelos para poder salir del casino, gracias.");
+                    rs.question("presione enter")
+                }else{
+                    salir();
+                    return;
+                }}
             default:
                 console.log("Opción inválida. Por favor, selecciona un número entre 1 y 4.");
         }
@@ -141,3 +151,23 @@ function ejecutarMenu() {
 }
 
 ejecutarMenu();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

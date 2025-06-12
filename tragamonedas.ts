@@ -3,6 +3,7 @@ import * as fs from 'fs';
 import { iApostar } from './iApostar';
 import { opcion1 } from '.';
 import { Jugador } from "./jugador";
+import { ejecutarMenu } from '.';   
 
 export class Tragamonedas  implements iApostar {
     private nombre: string;
@@ -33,7 +34,7 @@ export class Tragamonedas  implements iApostar {
 apuestaMinimaMaxima(): void {
         if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
             console.log("No tiene saldo suficiente, debe comprar más saldo");
-            opcion1();
+            ejecutarMenu();
             return;
         }
         let apuesta: number = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
