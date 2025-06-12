@@ -51,13 +51,13 @@ export class Ruleta implements iApostar {
     private mostrarMenu() {
         let total: number;
         //usamos un color asignado al principio y reseteamos el color 
-        console.log(this.ROJO + '\n=== MENU PRINCIPAL ===' + this.RESET);
+        console.log('\n=== MENU PRINCIPAL ===');
         console.log('1. Agregar apuesta');
         console.log('2. Ver apuestas');
         console.log('3. Girar ruleta');
         console.log('4. Salir');
         total = this.calcularMontoApuestas();
-        console.log(this.MAGENTA + `Saldo actual: $${this.jugador.getSaldoTarj()-total}` + this.RESET);
+        console.log(`Saldo actual: $${this.jugador.getSaldoTarj()-total}` );
         }
 
     private calcularMontoApuestas(): number{
@@ -69,10 +69,10 @@ export class Ruleta implements iApostar {
     }
     private agregarApuesta() {
         //usamos un color asignado al principio y reseteamos el color 
-        console.log(this.ROJO + '\n=== TIPOS DE APUESTA ===' + this.RESET);
-        console.log(this.VERDE + '1. Número (0-36)' + this.RESET);
-        console.log(this.AZUL + '2. Color (rojo/negro)' + this.RESET);
-        console.log(this.CIAN + '3. Par/Impar' + this.RESET);
+        console.log('\n=== TIPOS DE APUESTA ===');
+        console.log('1. Número (0-36)' );
+        console.log('2. Color (rojo/negro)' );
+        console.log('3. Par/Impar' );
 
         const tipo = rs.question('Tipo de apuesta (1-3): ');
         let opcion: string | number=0;
@@ -156,8 +156,8 @@ export class Ruleta implements iApostar {
         this.ultimoNumero = numero;
         this.ultimoColor = color;
 
-        console.log(this.ROJO + `\n=== RESULTADO ===` + this.RESET);
-        console.log(this.AMARILLO + `Número: ${numero} ${color} - ${numero === 0 ? 'cero' : esPar ? 'par' : 'impar'}` + this.RESET);
+        console.log( `\n=== RESULTADO ===` );
+        console.log(`Número: ${numero} ${color} - ${numero === 0 ? 'cero' : esPar ? 'par' : 'impar'}` );
 
         this.verificarApuestas();
         this.apuestasActuales = [];
@@ -171,7 +171,7 @@ export class Ruleta implements iApostar {
         const esPar = numero !== 0 && numero % 2 === 0;
         let gananciaTotal = 0;
 
-        console.log(this.VERDE + '\n=== RESULTADOS de Tus Apuestas!!! ===' + this.RESET);
+        console.log('\n=== RESULTADOS de Tus Apuestas!!! ===' );
         this.apuestasActuales.forEach(apuesta => {
             let gano = false;
             let multiplicador = 1;

@@ -1,11 +1,13 @@
 import * as rs from 'readline-sync';
 import * as fs from 'fs';
+import { opcion3 } from '.';
 export class Jugador {
     private static inst: Jugador;
     private name: string;
     private saldo: number;
     private saldoTarjeta: number;
     private retirar: number;
+    protected jugador:Jugador;
 
     private static ARCHIVO_SALDO = 'saldo.txt';
 
@@ -22,44 +24,36 @@ export class Jugador {
         return Jugador.inst;
     }
 
-    private guardarSaldo(): void {
-
-        const datos = {
-            name: this.name,
-            saldo: this.saldo,
-            saldoTarjeta: this.saldoTarjeta
-        };
-        fs.writeFileSync(Jugador.ARCHIVO_SALDO, JSON.stringify(datos));
-    }
-
-
-    private cargarSaldo(): void {
-
-        if (fs.existsSync(Jugador.ARCHIVO_SALDO)) {
-            const datos = fs.readFileSync(Jugador.ARCHIVO_SALDO, 'utf-8');
-            if (datos) {
-                //modificado antes de Karen
-                const { name,saldo, saldoTarjeta } = JSON.parse(datos);
-                this.name = name || this.name;
-                this.saldo = saldo || 0;
-                this.saldoTarjeta = saldoTarjeta || 0;
-            }
-        }
-
-    }
-
     setSaldoCarga() {
+        //if undefine o number =0
         let montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar?: ");
+        console.log(typeof(montoIngresado))
         while (montoIngresado < 100) {
             console.log("El monto no puede ser menor a 100");
-            montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar?: ");
+            montoIngresado = rs.questionInt("¿Cuánto saldo quiere cargar*******?: ");
         }
-        this.saldoTarjeta = montoIngresado * 3;
-        console.log("Sus créditos son: " + this.saldoTarjeta);
+        let saldoAnterior=fs.readFileSync('saldo.txt','utf-8')
+        let parsedSaldo=parseInt(saldoAnterior);
+        if(isNaN(parsedSaldo)){
+            parsedSaldo=0;
+
+        }
+        
+        console.log(parsedSaldo)
+        rs.question("tecla")
+        //---------------------------------
+        this.saldoTarjeta = (montoIngresado * 3) + parsedSaldo;
+        fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`)
+      
+        console.log("Sus créditos son: ");
         this.guardarSaldo();
     }
+    private guardarSaldo(): void {
+    fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`);
+    opcion3()
+    }
 
-    setSaldo(pSaldo:number){
+    setSaldo(pSaldo:number):void{
         this.saldoTarjeta = pSaldo;
     }
     retiraEfectivo() {

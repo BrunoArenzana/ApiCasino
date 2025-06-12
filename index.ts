@@ -31,7 +31,7 @@ function opcion2() {
     jugador1.retiraEfectivo();
 }
 
-function opcion3() {
+export function opcion3() {
     let salir = false;
     while (!salir) {
         console.clear();
@@ -96,29 +96,28 @@ function jugarRuleta() {
 
 function jugarMayorMenor() {
     console.log("Has seleccionado jugar a Mayor/Menor.");
-    const juegoMayorMenor = new MayorMenor(jugador1, 10, 500);
-    juegoMayorMenor.jugar();
+    //mayor y menor
 }
 function jugarTragamonedas1() {
     console.clear();
    
-    const tragamonedasF =  new TragamonedasLogo(jugador1);//
+    const tragamonedasF =  new TragamonedasLogo(jugador1);
     tragamonedasF.jugar();
-    console.log("Has seleccionado jugar: "+tragamonedasF.getNombre());
+    console.log("Has seleccionado jugar: ");
 }   
 
 function jugarTragamonedas2() {
     console.clear();
-    const tragamonedasN =  new TragamonedasNumeros(jugador1);//
+    const tragamonedasN =  new TragamonedasNumeros(jugador1);
     tragamonedasN.jugar();
-    console.log("Has seleccionado jugar :"+tragamonedasN.getNombre());
+    console.log("Has seleccionado jugar :");
 }   
 
 function salir() {
     console.log("Gracias por Jugar en ." + casino1.getNombre());
 }
 
-export function ejecutarMenu(){
+function ejecutarMenu() {
     while (true) {
         elegirTarea();
         let opcion = rs.questionInt("Seleccionar Tarea (1-4): ");

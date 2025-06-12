@@ -30,16 +30,21 @@ export class Tragamonedas  implements iApostar {
         return this.nombre;
     }
 
-    apuestaMinimaMaxima(): void {
-    if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
-        console.log("No tiene saldo suficiente, debe comprar más saldo");
-        opcion1();
-    }
-    let apuesta: number = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
-    while (apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || isNaN(apuesta)) {
-        apuesta = rs.questionInt(`La apuesta debe ser entre ${this.apuestaMinima} y ${this.apuestaMaxima}. Intenta nuevamente: `);
-    }
-    this.apuesta = apuesta;
+apuestaMinimaMaxima(): void {
+        if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
+            console.log("No tiene saldo suficiente, debe comprar más saldo");
+            opcion1();
+            return;
+        }
+        let apuesta: number = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
+        while (
+            apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || apuesta > this.jugador.getSaldoTarj()
+        ) {
+            console.log(this.jugador.getSaldoTarj())
+            console.log(`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}.`);
+            apuesta = rs.questionInt("Intenta nuevamente: ");
+        }
+        this.apuesta = apuesta;
     }
 
 
@@ -71,15 +76,18 @@ export class Tragamonedas  implements iApostar {
         let nuevoSaldo: number;
         if (repetido === 3) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 5)
+            console.log(this.jugador.getSaldoTarj())
             console.log("Ganaste apuesta x 5");
 
         } else if (repetido === 4) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 10)
+            console.log(this.jugador.getSaldoTarj())
             console.log("JACKPOT!!");
             console.log("GANASTE APUESTA X 10");
 
         } else {
             nuevoSaldo = this.jugador.getSaldoTarj() - this.apuesta;
+            console.log(this.jugador.getSaldoTarj())
             console.log("No tuviste suerte. Intenta de nuevo")
 
         }
