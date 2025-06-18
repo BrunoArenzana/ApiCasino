@@ -4,28 +4,36 @@ import { Jugador } from "./jugador";
 import { TragamonedasLogo } from "./tragamonedas1";
 import { TragamonedasNumeros } from "./tragamonedas2";
 import { MayorMenor } from './mayorMenor';
-
-
-let casino1 = new Casino("Casino 404");
-
 import { Ruleta } from "./ruleta";
-import { log } from "console";
-let nombreJugador1 = rs.question("ingrese su nombre: ");
-const jugador1 = Jugador.getInstance(nombreJugador1);
+import { Loggin } from "./login";
 
-export function elegirTarea() {    
+
+let casino1 = new Casino(`Casino 404`);
+
+
+let nombreJugador1:string = rs.question(`Ingrese su nombre: `);
+let edadJugador1:number = rs.questionInt(`Ingrese su edad: `);
+export let passwJugador1:string = rs.question(`Ingrese su Ingrese una contraseña: `);
+
+const loggin1 = new Loggin(nombreJugador1,passwJugador1,edadJugador1)
+const jugador1 = Jugador.getInstance(nombreJugador1);
+loggin1.validateLogin();
+
+// Menú Principal
+export function elegirTarea() {
     console.clear();
-    console.log("* Bienvenido "+jugador1.getName()+" al Casino " + casino1.getNombre()+" *" );
-    console.log("1- Comprar Saldo Tarjeta");
-    console.log("2- Cambiar Saldo Tarjeta");
-    console.log("3- Jugar");
-    console.log("4- Salir del Casino");
+    console.log(`* Bienvenido ${jugador1.getName()} al Casino ${casino1.getNombre()} *`);
+    console.log(`1- Comprar Saldo Tarjeta`);
+    console.log(`2- Cambiar Saldo Tarjeta`);
+    console.log(`3- Jugar`);
+    console.log(`4- Salir del Casino`);
 }
+
 export function opcion1() {
     jugador1.setSaldoCarga();
 }
 
-function opcion2() {
+export function opcion2() {
     jugador1.retiraEfectivo();
 }
 
@@ -33,14 +41,13 @@ export function opcion3() {
     let salir = false;
     while (!salir) {
         console.clear();
-        console.log("** Menú de Juegos **");
-        console.log("1- Jugar Ruleta");
-        console.log("2- Jugar Mayor/Menor");
-        console.log("3- Jugar Tragamonedas");
-        console.log("4- Volver al Menú Principal");
+        console.log(`** Menú de Juegos **`);
+        console.log(`1- Jugar Ruleta`);
+        console.log(`2- Jugar Mayor/Menor`);
+        console.log(`3- Jugar Tragamonedas`);
+        console.log(`4- Volver al Menú Principal`);
 
-
-        let opcionJuego = rs.questionInt("Seleccionar juego (1-4): ");
+        let opcionJuego = rs.questionInt(`Seleccionar juego (1-4): `);
         switch (opcionJuego) {
             case 1:
                 jugarRuleta();
@@ -51,12 +58,13 @@ export function opcion3() {
             case 3:
                 submenuTragamonedas();
                 break;
-                case 4:
-                    salir=true
+            case 4:
+                ejecutarMenu();
+                //se vuelve a ruleta ver, se envio a ejecutarmenu()
+                //salir = true;
                 break;
-        //saldo = this.jugador.getSaldoTarj();
             default:
-                console.log("Opción inválida. Intente de nuevo.");
+                console.log(`Opción inválida. Intente de nuevo.`);
         }
     }
 }
@@ -65,12 +73,12 @@ function submenuTragamonedas() {
     let salir = false;
     while (!salir) {
         console.clear();
-        console.log("==Estas en Tragamonedas==");
-        console.log("1- Jugar Tragamonedas 1");
-        console.log("2- Jugar Tragamonedas 2");
-        console.log("3- Volver al menú anterior");
+        console.log(`== Estas en Tragamonedas ==`);
+        console.log(`1- Jugar Tragamonedas Logo`);
+        console.log(`2- Jugar Tragamonedas Números`);
+        console.log(`3- Volver al menú anterior`);
 
-        let opcionTraga = rs.questionInt("Seleccionar juego (1-3): ");
+        let opcionTraga = rs.questionInt(`Seleccionar juego (1-3): `);
         switch (opcionTraga) {
             case 1:
                 jugarTragamonedas1();
@@ -82,45 +90,47 @@ function submenuTragamonedas() {
                 salir = true;
                 break;
             default:
-                console.log("Opción inválida. Intente de nuevo.");
+                console.log(`Opción inválida. Intente de nuevo.`);
         }
-        
     }
 }
 
 function jugarRuleta() {
-    console.log("Has seleccionado jugar a la Ruleta.");
+    console.log(`Has seleccionado jugar a la Ruleta.`);
     const ruleta = new Ruleta(jugador1);
     ruleta.jugar();
 }
 
 function jugarMayorMenor() {
-    console.log("Has seleccionado jugar a Mayor/Menor.");
+    console.log(`Has seleccionado jugar a Mayor/Menor.`);
     const juegoMayorMenor = new MayorMenor(jugador1, 10, 500);
     juegoMayorMenor.jugar();
 }
+
 function jugarTragamonedas1() {
     console.clear();
-    const tragamonedasF =  new TragamonedasLogo(jugador1);//
+    const tragamonedasF = new TragamonedasLogo(jugador1);
     tragamonedasF.jugar();
-    console.log("Has seleccionado jugar: "+tragamonedasF.getNombre());
-}   
+    console.log(`Has seleccionado jugar: ${tragamonedasF.getNombre()}`);
+}
 
 function jugarTragamonedas2() {
     console.clear();
-    const tragamonedasN =  new TragamonedasNumeros(jugador1);//
+    const tragamonedasN = new TragamonedasNumeros(jugador1);
     tragamonedasN.jugar();
-    console.log("Has seleccionado jugar :"+tragamonedasN.getNombre());
-}   
-
-function salir() {
-    console.log("Gracias por Jugar en ." + casino1.getNombre());
+    console.log(`Has seleccionado jugar: tragamonedasN.getNombre()`);
 }
 
-export function ejecutarMenu(){
+
+export function salir() {
+    console.log(`Gracias por Jugar en ${casino1.getNombre()}`);
+    process.exit(0);
+}
+
+export function ejecutarMenu() {
     while (true) {
         elegirTarea();
-        let opcion = rs.questionInt("Seleccionar Tarea (1-4): ");
+        let opcion = rs.questionInt(`Seleccionar Tarea (1-4): `);
         switch (opcion) {
             case 1:
                 opcion1();
@@ -133,40 +143,21 @@ export function ejecutarMenu(){
                 break;
             case 4:
                 const respuesta = rs.question(`Escriba "salir" para salir del casino, de lo contrario, presione enter para continuar: `);
-                console.clear();
-                if (respuesta === null || respuesta.toLowerCase() == 'salir') {
-                if(jugador1.getSaldoTarj()>0){
-                    console.log("Aun quedan creditos en su tarjeta, retirelos para poder salir del casino, gracias.");
-                    rs.question("presione enter");
-                    opcion2();
-                    console.clear();
+                if (respuesta === null || respuesta.toLowerCase() === 'salir') {
+                    if (jugador1.getSaldoTarj() > 0) {
+                        console.log(`Aún quedan créditos en su tarjeta. Retírelos para poder salir del casino, gracias.`);
+                        rs.question(`Presione enter para retirar su dinero. `);
+                        jugador1.retiraEfectivoSalida();
+                    }
                     salir();
-                    return;
-}}
+                }
+                break;
+
             default:
-                console.log("Opción inválida. Por favor, selecciona un número entre 1 y 4.");
+                console.log(`Opción inválida. Por favor, selecciona un número entre 1 y 4.`);
+                break;
         }
     }
 }
 
 ejecutarMenu();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,8 +6,6 @@ import * as fs from 'fs';
 import { ConsoleColor } from './ConsoleColor';
 
 
-
-
 export class Ruleta implements iApostar {   
     // propios de nuestra ruleta
     private saldo: number;
@@ -34,7 +32,7 @@ export class Ruleta implements iApostar {
         console.log(`Bienvenido a la Ruleta Loca!!! Saldo inicial: $${this.saldo}`);
         this.apuestaMinimaMaxima();
 
-        while (this.saldo > 0) {
+        while (this.saldo >= 0) {
             this.mostrarMenu();
             const opcion = rs.question('Opcion: ');
 
@@ -126,7 +124,7 @@ export class Ruleta implements iApostar {
         if (monto < this.apuestaMinima || monto > this.saldo - montoActualizado || monto>this.apuestaMaxima) {
             
             //verificamos el monto de la apuesta , que no sea menor a 0 ni mayor al saldo actual
-            console.log(`Monto inválido. La apuesta minima es de ${this.apuestaMinima}, la maxima es de ${this.apuestaMaxima} y no mayor a su saldo`);
+            console.log(`Monto inválido. La apuesta minima es de ${this.apuestaMinima}, la maxima es de ${this.apuestaMaxima} y no menor a su saldo`);
             return;
         }
         this.apuestasActuales.push({ tipo: tipoApuesta, opcion, monto });

@@ -24,7 +24,7 @@ export class Tragamonedas  implements iApostar {
     }
 apuestaMinimaMaxima(): void {
         if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
-            console.log("No tiene saldo suficiente, debe comprar más saldo");
+            console.log('No tiene saldo suficiente, debe comprar más saldo');
             opcion1();
             return;
         }
@@ -34,7 +34,7 @@ apuestaMinimaMaxima(): void {
         ) {
             console.log(this.jugador.getSaldoTarj())
             console.log(`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}.`);
-            apuesta = rs.questionInt("Intenta nuevamente: ");
+            apuesta = rs.questionInt('Intenta nuevamente: ');
         }
         this.apuesta = apuesta;
     }
@@ -64,33 +64,33 @@ apuestaMinimaMaxima(): void {
         if (repetido === 3) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 5)
             console.log(this.jugador.getSaldoTarj())
-            console.log("Ganaste apuesta x 5");
+            console.log('Ganaste apuesta x 5');
         } else if (repetido === 4) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 10)
             console.log(this.jugador.getSaldoTarj())
-            console.log("JACKPOT!!");
-            console.log("GANASTE APUESTA X 10");
+            console.log('JACKPOT!!');
+            console.log('GANASTE APUESTA X 10');
         } else {
             nuevoSaldo = this.jugador.getSaldoTarj() - this.apuesta;
             console.log(this.jugador.getSaldoTarj())
-            console.log("No tuviste suerte. Intenta de nuevo")
+            console.log('No tuviste suerte. Intenta de nuevo')
         }
         this.jugador.setSaldo(nuevoSaldo);
-        console.log("Saldo actual: " + this.jugador.getSaldoTarj())
+        console.log(`Saldo actual: ${this.jugador.getSaldoTarj()}`);;
         fs.writeFileSync('saldo.txt', `${this.jugador.getSaldoTarj()}`);
     }
     public jugar() {
         let seguir = true;
         while (seguir) {
-            console.log("** Tragamonedas " + this.nombre + " **");
+            console.log(`** Tragamonedas  ${this.nombre}  **`);
             this.apuestaMinimaMaxima();
             const resultado = this.tirar();
             this.calcularResultado(resultado);
-            const respuesta = rs.question("Presione enter para Seguir / Escriba SALIR para terminar: ");
+            const respuesta = rs.question(`Presione enter para Seguir / Escriba SALIR para terminar: `);
             console.clear();
             if (respuesta === null || respuesta.toLowerCase() == 'salir') {
                 seguir = false;
-                console.log("¡Gracias por jugar!");
+                console.log(`Gracias por jugar!`);
             }
         }
     }
