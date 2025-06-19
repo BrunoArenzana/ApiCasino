@@ -4,6 +4,7 @@ import { iApostar } from './iApostar';
 import { opcion1 } from '.';
 import { Jugador } from "./jugador";
 import { Juegos } from './abstractJuegos';
+import { ConsoleColor } from './consoleColor';
 
 export class Tragamonedas extends Juegos implements iApostar {
     private nombre: string;
@@ -26,7 +27,7 @@ export class Tragamonedas extends Juegos implements iApostar {
     }
     apuestaMinimaMaxima(): void {
         if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
-            console.log('No tiene saldo suficiente, debe comprar más saldo');
+            console.log(ConsoleColor.Red + `No tiene saldo suficiente, debe comprar más saldo`+ ConsoleColor.Reset );
             opcion1();
             return;
         }
@@ -35,7 +36,7 @@ export class Tragamonedas extends Juegos implements iApostar {
             apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || apuesta > this.jugador.getSaldoTarj()
         ) {
             //console.log("Saldo disponible: " + this.jugador.getSaldoTarj())
-            console.log(`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}. y no puede superar  ${this.jugador.getSaldoTarj()} que es su saldo actual`);
+            console.log(ConsoleColor.Red +`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}. y no puede superar  ${this.jugador.getSaldoTarj()} que es su saldo actual`+ ConsoleColor.Reset);
             apuesta = rs.questionInt('Intenta nuevamente: ');
         }
         this.apuesta = apuesta;
@@ -66,7 +67,7 @@ export class Tragamonedas extends Juegos implements iApostar {
         if (repetido === 3) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 5)
            // console.log(this.jugador.getSaldoTarj())
-            console.log('Ganaste apuesta x 5');
+            console.log(ConsoleColor.Green+'Ganaste apuesta x 5'+ConsoleColor.Reset);
         } else if (repetido === 4) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 10)
             //console.log(this.jugador.getSaldoTarj())
@@ -78,7 +79,7 @@ export class Tragamonedas extends Juegos implements iApostar {
             console.log('No tuviste suerte. Intenta de nuevo')
         }
         this.jugador.setSaldo(nuevoSaldo);
-        console.log(`Saldo actual: ${this.jugador.getSaldoTarj()}`);;
+        console.log(`Saldo actual:`+ConsoleColor.Yellow + `${this.jugador.getSaldoTarj()}`+ConsoleColor.Reset);;
         fs.writeFileSync('saldo.txt', `${this.jugador.getSaldoTarj()}`);
     }
     jugar() {
