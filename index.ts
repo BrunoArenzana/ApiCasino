@@ -5,8 +5,7 @@ import { TragamonedasLogo } from "./tragamonedas1";
 import { TragamonedasNumeros } from "./tragamonedas2";
 import { MayorMenor } from './mayorMenor';
 import { Ruleta } from "./ruleta";
-import { Loggin } from "./login";
-
+import { Login } from "./login";
 
 let casino1 = new Casino(`Casino 404`);
 
@@ -15,10 +14,21 @@ let nombreJugador1:string = rs.question(`Ingrese su nombre: `);
 let edadJugador1:number = rs.questionInt(`Ingrese su edad: `);
 export let passwJugador1:string = rs.question(`Ingrese su Ingrese una contraseña: `,{ hideEchoBack: true  });
 
-const loggin1 = new Loggin(nombreJugador1,passwJugador1,edadJugador1)
+const login1 = new Login(nombreJugador1,passwJugador1,edadJugador1)
+const loginValido = login1.validateLogin(); // agregado para verificar clave
 const jugador1 = Jugador.getInstance(nombreJugador1);
-loggin1.validateLogin();
 
+
+if (!loginValido) {
+    console.log('No se puede continuar debido a errores de validación');
+    salir();
+} else {
+    // de esta forma instanciamos el jugador solo si el logueo es valido
+    const jugador1 = Jugador.getInstance(nombreJugador1);
+    
+    console.log(`\nBienvenido ${nombreJugador1} al ${casino1.getNombre}!`);
+    console.log('Login exitoso. Redirigiendo al menú principal...');
+}
 // Menú Principal
 export function elegirTarea() {
     console.clear();

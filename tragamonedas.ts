@@ -34,8 +34,8 @@ export class Tragamonedas extends Juegos implements iApostar {
         while (
             apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || apuesta > this.jugador.getSaldoTarj()
         ) {
-            console.log(this.jugador.getSaldoTarj())
-            console.log(`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}.`);
+            //console.log("Saldo disponible: " + this.jugador.getSaldoTarj())
+            console.log(`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}. y no puede superar  ${this.jugador.getSaldoTarj()} que es su saldo actual`);
             apuesta = rs.questionInt('Intenta nuevamente: ');
         }
         this.apuesta = apuesta;
@@ -65,16 +65,16 @@ export class Tragamonedas extends Juegos implements iApostar {
         let nuevoSaldo: number;
         if (repetido === 3) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 5)
-            console.log(this.jugador.getSaldoTarj())
+           // console.log(this.jugador.getSaldoTarj())
             console.log('Ganaste apuesta x 5');
         } else if (repetido === 4) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 10)
-            console.log(this.jugador.getSaldoTarj())
+            //console.log(this.jugador.getSaldoTarj())
             console.log('JACKPOT!!');
             console.log('GANASTE APUESTA X 10');
         } else {
             nuevoSaldo = this.jugador.getSaldoTarj() - this.apuesta;
-            console.log(this.jugador.getSaldoTarj())
+            //console.log(this.jugador.getSaldoTarj())
             console.log('No tuviste suerte. Intenta de nuevo')
         }
         this.jugador.setSaldo(nuevoSaldo);

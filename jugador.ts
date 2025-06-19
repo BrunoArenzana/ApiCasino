@@ -1,6 +1,6 @@
 import * as rs from 'readline-sync';
 import * as fs from 'fs';
-import { opcion3 } from '.';
+import { opcion3, salir } from '.';
 import { passwJugador1 } from '.';
 export class Jugador {
     private static inst: Jugador;
@@ -49,7 +49,8 @@ export class Jugador {
     }
 
     retiraEfectivo() {
-        for (let i = 0; i < 3; i++) {
+        let intentos:number = 3
+       for (let i = 3; i >=0 ; i--) {
             let ingresar = rs.question("Ingrese su contraseña para retirar saldo: ",{ hideEchoBack: true  })
             if (ingresar === passwJugador1) {
                 let retirar = this.getSaldoTarj() / 3;
@@ -60,8 +61,15 @@ export class Jugador {
 
 
             } else {
+                intentos --
                 console.log("Contraseña incorrecta");
-                rs.question("enter")
+                console.log("tiene "+ intentos + ". si no ingresa la contraseña correcta perdera su saldo")
+                 if(intentos ===0){
+                console.log("no puede recuperar su saldo")
+                console.log("cuenta bloqueada, debe salir del casino")
+                
+                salir()
+                }
             }
         }
 
@@ -71,7 +79,8 @@ export class Jugador {
 
     //agregado
     retiraEfectivoSalida() {
-        for (let i = 0; i < 3; i++) {
+        let intentos:number = 3
+        for (let i = 3; i >=0 ; i--) {
             let ingresar = rs.question("Ingrese su contraseña para retirar saldo: ",{ hideEchoBack: true  });
             if (ingresar === passwJugador1) {
                 let retirar = this.getSaldoTarj() / 3;
@@ -83,8 +92,15 @@ export class Jugador {
 
 
             } else {
+                intentos --
                 console.log("Contraseña incorrecta");
-                rs.question("enter")
+                console.log("tiene "+ intentos + ". si no ingresa la contraseña correcta perdera su saldo")
+                if(intentos ===0){
+                console.log("no puede recuperar su saldo")
+                console.log("cuenta bloqueada, debe salir del casino")
+                
+                salir()
+                }
             }
         }
 
