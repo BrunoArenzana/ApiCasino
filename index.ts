@@ -13,7 +13,7 @@ let casino1 = new Casino(`Casino 404`);
 
 let nombreJugador1:string = rs.question(`Ingrese su nombre: `);
 let edadJugador1:number = rs.questionInt(`Ingrese su edad: `);
-export let passwJugador1:string = rs.question(`Ingrese su Ingrese una contraseña: `);
+export let passwJugador1:string = rs.question(`Ingrese su Ingrese una contraseña: `,{ hideEchoBack: true  });
 
 const loggin1 = new Loggin(nombreJugador1,passwJugador1,edadJugador1)
 const jugador1 = Jugador.getInstance(nombreJugador1);

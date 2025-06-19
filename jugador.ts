@@ -50,7 +50,7 @@ export class Jugador {
 
     retiraEfectivo() {
         for (let i = 0; i < 3; i++) {
-            let ingresar = rs.question("Ingrese su contraseña para retirar saldo: ")
+            let ingresar = rs.question("Ingrese su contraseña para retirar saldo: ",{ hideEchoBack: true  })
             if (ingresar === passwJugador1) {
                 let retirar = this.getSaldoTarj() / 3;
                 this.saldo += parseFloat(retirar.toFixed(2));
@@ -72,7 +72,7 @@ export class Jugador {
     //agregado
     retiraEfectivoSalida() {
         for (let i = 0; i < 3; i++) {
-            let ingresar = rs.question("Ingrese su contraseña para retirar saldo: ")
+            let ingresar = rs.question("Ingrese su contraseña para retirar saldo: ",{ hideEchoBack: true  });
             if (ingresar === passwJugador1) {
                 let retirar = this.getSaldoTarj() / 3;
                 this.saldo += parseFloat(retirar.toFixed(2));
