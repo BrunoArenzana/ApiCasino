@@ -3,8 +3,6 @@ Casino es un juego creado para la entraga del Trabajo Practico Final del segundo
 Se implemento codigo typescript en el entorno de ejecucion nodejs.
 Se transpilo el codigo a JavaScrip.
 Se utilizaron modulos como file-system y readline-sync.
-
-
 -----------
 # ApiCasino
 Final Cuatrimestre

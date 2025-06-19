@@ -1,8 +1,7 @@
 import * as rs from 'readline-sync';
 import * as fs from 'fs';
-import { opcion3, salir } from '.';
+import { opcion3 } from '.';
 import { passwJugador1 } from '.';
-import { opcion2 } from '.';
 export class Jugador {
     private static inst: Jugador;
     private name: string;

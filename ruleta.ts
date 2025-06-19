@@ -3,10 +3,11 @@ import { Jugador } from './jugador';
 import { iApostar } from './iApostar';
 import { opcion1 } from '.';
 import * as fs from 'fs';
-import { ConsoleColor } from './ConsoleColor';
+import { Juegos } from './abstractJuegos';
+import { ConsoleColor } from './consoleColor';
 
 
-export class Ruleta implements iApostar {   
+export class Ruleta extends Juegos implements iApostar {   
     // propios de nuestra ruleta
     private saldo: number;
     private rojos = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36]; // Guardo los rojos en un arreglo (buscado en "https://www.casino.es/ruleta/como-jugar-ruleta/")
@@ -18,6 +19,7 @@ export class Ruleta implements iApostar {
     private apuestaMaxima = 1001;
     
     constructor(pJugador: Jugador) {
+        super()
         if (!pJugador) throw new Error("Jugador requerido");
         this.jugador = pJugador;
         this.saldo = this.jugador.getSaldoTarj();
