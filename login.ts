@@ -1,5 +1,5 @@
 import { salir } from ".";
-
+import * as rs from "readline-sync";
 export class Login {
   private username: string;
   private password: string;

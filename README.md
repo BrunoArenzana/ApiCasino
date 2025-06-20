@@ -1,8 +1,11 @@
 # ApiCasino
 Casino es un juego creado para la entraga del Trabajo Practico Final del segundo cuatrimestre de la Carrera Full Stack dictada por CEPIT
 Se implemento codigo typescript en el entorno de ejecucion nodejs.
-Se transpilo el codigo a JavaScrip.
+Se transpilo el codigo a JavaScript.
 Se utilizaron modulos como file-system y readline-sync.
+
+----------
+
 -----------
 # ApiCasino
 Final Cuatrimestre
@@ -11,7 +14,7 @@ ApiCasino Pertenece al grupo Error404 (Querian,Marcelo  y Bruno)
 Se trata del desarrollo de una aplicacion que consta con 4 tipos de juegos estilo casino
 tragamonedas, ruleta y mayor/menor.
 
-Steps to Steps
+paso a paso
 
 El usuario loguea en el casino, y compra credito para poder jugar.
 Elige siguiendo el menu, la opcion que desea entre las disponibles.
