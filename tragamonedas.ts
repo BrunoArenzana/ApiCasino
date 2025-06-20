@@ -14,7 +14,7 @@ export class Tragamonedas extends Juegos implements iApostar {
     private apuestaMaxima: number;
     protected jugador!: Jugador;
 
-    constructor(pName: string, pNombre: string, pFiguras: string[], pApuestaMinima: number, pApuestaMaxima: number) {
+    constructor(pNombre: string, pFiguras: string[], pApuestaMinima: number, pApuestaMaxima: number) {
       super()  
         this.nombre = pNombre;
         this.figuras = pFiguras;
@@ -25,6 +25,9 @@ export class Tragamonedas extends Juegos implements iApostar {
     getNombre() {
         return this.nombre;
     }
+    setNombre(pNombre:string):void{
+        this.nombre = pNombre;
+    }
     apuestaMinimaMaxima(): void {
         if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
             console.log(ConsoleColor.Red + `No tiene saldo suficiente, debe comprar más saldo`+ ConsoleColor.Reset );
@@ -32,12 +35,13 @@ export class Tragamonedas extends Juegos implements iApostar {
             return;
         }
         let apuesta: number = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
+        console.clear()//agregado para probar
+        console.log(ConsoleColor.Green+`** Tragamonedas ${this.nombre} **`+ConsoleColor.Reset);
         while (
             apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || apuesta > this.jugador.getSaldoTarj()
         ) {
-            //console.log("Saldo disponible: " + this.jugador.getSaldoTarj())
             console.log(ConsoleColor.Red +`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}. y no puede superar  ${this.jugador.getSaldoTarj()} que es su saldo actual`+ ConsoleColor.Reset);
-            apuesta = rs.questionInt('Intenta nuevamente: ');
+            apuesta = rs.questionInt('Intenta nuevamente: ');   
         }
         this.apuesta = apuesta;
     }
@@ -66,34 +70,34 @@ export class Tragamonedas extends Juegos implements iApostar {
         let nuevoSaldo: number;
         if (repetido === 3) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 5)
-           // console.log(this.jugador.getSaldoTarj())
-            console.log(ConsoleColor.Green+'Ganaste apuesta x 5'+ConsoleColor.Reset);
+            console.log(ConsoleColor.Green+'Ganaste apuesta x 5 !'+ConsoleColor.Reset);
         } else if (repetido === 4) {
             nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 10)
-            //console.log(this.jugador.getSaldoTarj())
-            console.log('JACKPOT!!');
-            console.log('GANASTE APUESTA X 10');
+            console.log(ConsoleColor.Green+'JACKPOT!!'+ConsoleColor.Reset);
+            console.log(ConsoleColor.Green+'GANASTE APUESTA X 10'+ConsoleColor.Reset);
         } else {
             nuevoSaldo = this.jugador.getSaldoTarj() - this.apuesta;
-            //console.log(this.jugador.getSaldoTarj())
             console.log('No tuviste suerte. Intenta de nuevo')
         }
         this.jugador.setSaldo(nuevoSaldo);
-        console.log(`Saldo actual:`+ConsoleColor.Yellow + `${this.jugador.getSaldoTarj()}`+ConsoleColor.Reset);;
+        console.log(`Saldo actual: `+ConsoleColor.Yellow + `${this.jugador.getSaldoTarj()}`+ConsoleColor.Reset);;
         fs.writeFileSync('saldo.txt', `${this.jugador.getSaldoTarj()}`);
     }
     jugar() {
         let seguir = true;
         while (seguir) {
-            console.log(`** Tragamonedas  ${this.nombre}  **`);
+            console.log(ConsoleColor.Green+`** Tragamonedas ${this.nombre} **`+ConsoleColor.Reset);
+
             this.apuestaMinimaMaxima();
+            console.log("-----------------------")//agregado
             const resultado = this.tirar();
+            console.log("-----------------------")//agregado
             this.calcularResultado(resultado);
-            const respuesta = rs.question(`Presione enter para Seguir / Escriba SALIR para terminar: `);
+            const respuesta = rs.question(`Presione` + ConsoleColor.Green+ ` ENTER`+ConsoleColor.Reset+` para Seguir o escriba` + ConsoleColor.Red+ ` SALIR`+ ConsoleColor.Reset+` para terminar: `);
             console.clear();
             if (respuesta === null || respuesta.toLowerCase() == 'salir') {
                 seguir = false;
-                console.log(`Gracias por jugar!`);
+                console.log(+ConsoleColor.Green+`Gracias por jugar!`+ConsoleColor.Reset);
             }
         }
     }

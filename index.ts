@@ -75,7 +75,9 @@ export function opcion3() {
                 //salir = true;
                 break;
             default:
-                console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo.`+ConsoleColor.Reset);
+                console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo opciones 1 a 4.`+ConsoleColor.Reset);
+                rs.question(`Presione` + ConsoleColor.Green+ ` ENTER`+ConsoleColor.Reset+` para Seguir`);
+
         }
     }
 }
@@ -85,9 +87,9 @@ function submenuTragamonedas() {
     while (!salir) {
         console.clear();
         console.log(ConsoleColor.Green+`** Estas en Tragamonedas **`+ConsoleColor.Reset);
-        console.log(ConsoleColor.Magenta+`1- `+ConsoleColor.Reset+` Jugar Tragamonedas Logo`);
-        console.log(ConsoleColor.Magenta+`2- `+ConsoleColor.Reset+` Jugar Tragamonedas Números`);
-        console.log(ConsoleColor.Magenta+`3- `+ConsoleColor.Reset+` Volver al menú anterior`);
+        console.log(ConsoleColor.Magenta+`1-`+ConsoleColor.Reset+` Jugar Tragamonedas Logo`);
+        console.log(ConsoleColor.Magenta+`2-`+ConsoleColor.Reset+` Jugar Tragamonedas Números`);
+        console.log(ConsoleColor.Magenta+`3-`+ConsoleColor.Reset+` Volver al menú anterior`);
 
         let opcionTraga = rs.questionInt(`Seleccionar juego (1-3): `);
         switch (opcionTraga) {
@@ -101,7 +103,8 @@ function submenuTragamonedas() {
                 salir = true;
                 break;
             default:
-                console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo.`+ConsoleColor.Reset);
+                console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo opciones 1 a 3.`+ConsoleColor.Reset);
+                rs.question(`Presione` + ConsoleColor.Green+ ` ENTER`+ConsoleColor.Reset+` para Seguir`);
         }
     }
 }
@@ -129,7 +132,7 @@ function jugarTragamonedas2() {
     console.clear();
     const tragamonedasN = new TragamonedasNumeros(jugador1);
     tragamonedasN.jugar();
-    console.log(ConsoleColor.Cyan+`Has seleccionado jugar: tragamonedasN.getNombre()`+ConsoleColor.Reset);
+    console.log(ConsoleColor.Cyan+`Has seleccionado jugar: ${tragamonedasN.getNombre()}`+ConsoleColor.Reset);
 }
 
 
@@ -165,8 +168,9 @@ export function ejecutarMenu() {
                 break;
 
             default:
-                console.log(ConsoleColor.Red+`Opción inválida. Por favor, selecciona un número entre 1 y 4.`+ConsoleColor.Reset);
-                break;
+            console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo opciones 1 a 4.`+ConsoleColor.Reset);
+            rs.question(`Presione` + ConsoleColor.Green+ ` ENTER`+ConsoleColor.Reset+` para Seguir`);
+            break;
         }
     }
 }
