@@ -15,14 +15,5 @@ export enum ConsoleColor {
     Hidden = "\x1b[8m",
     Strikethrough = "\x1b[9m ",
 
-    Bold = "\x1b[1m" ,
-    Dim = "\x1b[2m", 
-    Italic = "\x1b[3m", // cursiva
-    Underline = "\x1b[4m", //subrayado
-    Blink = "\x1b[5m ", //parpadea no funca
-    Inverse = "\x1b[7m", 
-    Hidden = "\x1b[8m",
-    Strikethrough = "\x1b[9m ",
-
 }
 //console.log(ConsoleColor.Red + "texto a colorear"+ ConsoleColor.Reset);
