@@ -40,8 +40,11 @@ export class Tragamonedas extends Juegos implements iApostar {
         while (
             apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || apuesta > this.jugador.getSaldoTarj()
         ) {
-            console.log(ConsoleColor.Red +`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}. y no puede superar  ${this.jugador.getSaldoTarj()} que es su saldo actual`+ ConsoleColor.Reset);
-            apuesta = rs.questionInt('Intenta nuevamente: ');   
+            console.log(ConsoleColor.Red +`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}. y no puede superar ${this.jugador.getSaldoTarj()} que es su saldo actual`+ ConsoleColor.Reset);
+            apuesta = rs.questionInt('Intenta nuevamente: ');
+            console.clear();//agregado
+            console.log(ConsoleColor.Green+`** Tragamonedas ${this.nombre} **`+ConsoleColor.Reset);
+
         }
         this.apuesta = apuesta;
     }
