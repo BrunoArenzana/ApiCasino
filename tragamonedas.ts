@@ -30,7 +30,7 @@ export class Tragamonedas extends Juegos implements iApostar {
     }
     apuestaMinimaMaxima(): void {
         if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
-            console.log(ConsoleColor.Red + `No tiene saldo suficiente, debe comprar más saldo`+ ConsoleColor.Reset );
+            console.log(ConsoleColor.Red + `No tiene creditos suficientes, debe comprar más creditos`+ ConsoleColor.Reset );
             opcion1();
             return;
         }
@@ -40,7 +40,7 @@ export class Tragamonedas extends Juegos implements iApostar {
         while (
             apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || apuesta > this.jugador.getSaldoTarj()
         ) {
-            console.log(ConsoleColor.Red +`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}. y no puede superar ${this.jugador.getSaldoTarj()} que es su saldo actual`+ ConsoleColor.Reset);
+            console.log(ConsoleColor.Red +`Apuesta inválida. Debe estar entre ${this.apuestaMinima} y ${this.apuestaMaxima}. y no puede superar ${this.jugador.getSaldoTarj()} que es sus creditos actuales`+ ConsoleColor.Reset);
             apuesta = rs.questionInt('Intenta nuevamente: ');
             console.clear();//agregado
             console.log(ConsoleColor.Green+`** Tragamonedas ${this.nombre} **`+ConsoleColor.Reset);
@@ -72,18 +72,18 @@ export class Tragamonedas extends Juegos implements iApostar {
         }
         let nuevoSaldo: number;
         if (repetido === 3) {
-            nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 5)
-            console.log(ConsoleColor.Green+'Ganaste apuesta x 5 !'+ConsoleColor.Reset);
+            nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 3.5)
+            console.log(ConsoleColor.Green+'Ganaste apuesta x 3.5 !'+ConsoleColor.Reset);
         } else if (repetido === 4) {
-            nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 10)
+            nuevoSaldo = this.jugador.getSaldoTarj() + (this.apuesta * 7)
             console.log(ConsoleColor.Green+'JACKPOT!!'+ConsoleColor.Reset);
-            console.log(ConsoleColor.Green+'GANASTE APUESTA X 10'+ConsoleColor.Reset);
+            console.log(ConsoleColor.Green+'GANASTE APUESTA X 7'+ConsoleColor.Reset);
         } else {
             nuevoSaldo = this.jugador.getSaldoTarj() - this.apuesta;
             console.log('No tuviste suerte. Intenta de nuevo')
         }
         this.jugador.setSaldo(nuevoSaldo);
-        console.log(`Saldo actual: `+ConsoleColor.Yellow + `${this.jugador.getSaldoTarj()}`+ConsoleColor.Reset);;
+        console.log(`creditos actuales: `+ConsoleColor.Yellow + `${this.jugador.getSaldoTarj()}`+ConsoleColor.Reset);;
         fs.writeFileSync('saldo.txt', `${this.jugador.getSaldoTarj()}`);
     }
     jugar() {

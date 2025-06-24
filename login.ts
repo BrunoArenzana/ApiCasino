@@ -11,19 +11,33 @@ export class Login {
     this.age = age;
   }
 
-  public validateLogin() {
-    if (this.age < 18) {
-      console.log("No puedes ingresar ley 13470 Menores, apuestas y juegos de azar");
-      salir();
-      return false;
-    }
-    
-    if (!this.validatePassword()) {
+ public validateLogin() {
+  if (this.age < 18) {
+    console.log("No puedes ingresar - (ley 13470 Menores, apuestas y juegos de azar)");
+    salir();
     return false;
-    }
-    
-    return true;
   }
+
+  let intentos = 3;
+
+  while (intentos > 0) {
+    if (this.validatePassword()) {
+      return true;
+    }
+
+    intentos--;
+    if (intentos > 0) {
+      console.log(`Contraseña inválida. Te quedan ${intentos} intento(s).`);
+      this.password = rs.question("Reingresá tu contraseña:");
+    } else {
+      console.error("Has excedido los 3 intentos. Acceso denegado.");
+    }
+  }
+
+  return false;
+}
+
+
 
 private validatePassword(): boolean {
   

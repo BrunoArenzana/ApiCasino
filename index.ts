@@ -13,7 +13,7 @@ let casino1 = new Casino(`Casino 404`);
 
 let nombreJugador1:string = rs.question(ConsoleColor.Bold+ConsoleColor.Blue + `Ingrese su nombre: `+ ConsoleColor.Reset);
 let edadJugador1:number = rs.questionInt(ConsoleColor.Bold +ConsoleColor.Blue +`Ingrese su edad: `+ConsoleColor.Reset);
-export let passwJugador1:string = rs.question(ConsoleColor.Bold +ConsoleColor.Blue + `Ingrese su Ingrese una contraseña: `+ConsoleColor.Reset,{ hideEchoBack: true  });
+export let passwJugador1:string = rs.question(ConsoleColor.Bold +ConsoleColor.Blue + `Ingrese una password (debe recordarla): `+ConsoleColor.Reset,{ hideEchoBack: true  });
 
 const login1 = new Login(nombreJugador1,passwJugador1,edadJugador1)
 const loginValido = login1.validateLogin(); // agregado para verificar clave
@@ -75,9 +75,8 @@ export function opcion3() {
                 //salir = true;
                 break;
             default:
-                console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo opciones 1 a 4.`+ConsoleColor.Reset);
+               console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo opciones 1 a 4.`+ConsoleColor.Reset);
                 rs.question(`Presione` + ConsoleColor.Green+ ` ENTER`+ConsoleColor.Reset+` para Seguir`);
-
         }
     }
 }
@@ -87,9 +86,9 @@ function submenuTragamonedas() {
     while (!salir) {
         console.clear();
         console.log(ConsoleColor.Green+`** Estas en Tragamonedas **`+ConsoleColor.Reset);
-        console.log(ConsoleColor.Magenta+`1-`+ConsoleColor.Reset+` Jugar Tragamonedas Logo`);
-        console.log(ConsoleColor.Magenta+`2-`+ConsoleColor.Reset+` Jugar Tragamonedas Números`);
-        console.log(ConsoleColor.Magenta+`3-`+ConsoleColor.Reset+` Volver al menú anterior`);
+        console.log(ConsoleColor.Magenta+`1- `+ConsoleColor.Reset+` Jugar Tragamonedas Logo`);
+        console.log(ConsoleColor.Magenta+`2- `+ConsoleColor.Reset+` Jugar Tragamonedas Números`);
+        console.log(ConsoleColor.Magenta+`3- `+ConsoleColor.Reset+` Volver al menú anterior`);
 
         let opcionTraga = rs.questionInt(`Seleccionar juego (1-3): `);
         switch (opcionTraga) {
@@ -132,7 +131,7 @@ function jugarTragamonedas2() {
     console.clear();
     const tragamonedasN = new TragamonedasNumeros(jugador1);
     tragamonedasN.jugar();
-    console.log(ConsoleColor.Cyan+`Has seleccionado jugar: ${tragamonedasN.getNombre()}`+ConsoleColor.Reset);
+    console.log(ConsoleColor.Cyan+`Has seleccionado jugar: tragamonedasN.getNombre()`+ConsoleColor.Reset);
 }
 
 
@@ -168,9 +167,9 @@ export function ejecutarMenu() {
                 break;
 
             default:
-            console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo opciones 1 a 4.`+ConsoleColor.Reset);
-            rs.question(`Presione` + ConsoleColor.Green+ ` ENTER`+ConsoleColor.Reset+` para Seguir`);
-            break;
+                console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo opciones 1 a 4.`+ConsoleColor.Reset);
+                rs.question(`Presione` + ConsoleColor.Green+ ` ENTER`+ConsoleColor.Reset+` para Seguir`);
+                break;
         }
     }
 }

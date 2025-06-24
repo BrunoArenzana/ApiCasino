@@ -4,13 +4,14 @@ import { opcion3, salir } from '.';
 import { passwJugador1 } from '.';
 import { ConsoleColor } from './consoleColor';
 export class Jugador {
-    private static inst: Jugador;
+    static inst: Jugador;
     private name: string;
     private saldo: number;
     private saldoTarjeta: number;
     private retirar: number;
     private static ARCHIVO_SALDO = 'saldo.txt';
-    constructor(pName: string) {
+
+    private constructor(pName: string) {
         this.name = pName;
         this.saldo = 0;
         this.saldoTarjeta = 0;
@@ -23,10 +24,13 @@ export class Jugador {
         return Jugador.inst;
     }
     setSaldoCarga() {
-        let montoIngresado = rs.questionInt(ConsoleColor.Italic + ConsoleColor.Green + 'Cuanto saldo quiere cargar?: ' + ConsoleColor.Reset + ConsoleColor.Reset);
+        console.log(ConsoleColor.Bold+ConsoleColor.Yellow+`            $1 = 3 creditos`+ConsoleColor.Reset)
+        let montoIngresado = rs.questionInt(ConsoleColor.Italic + ConsoleColor.Green + '...Cuanto saldo quiere cargar?: ' + ConsoleColor.Reset + ConsoleColor.Reset);
         while (montoIngresado < 100) {
+            console.clear();
             console.log(ConsoleColor.Red + 'El monto no puede ser menor a 100 creditos' + ConsoleColor.Reset);
-            montoIngresado = rs.questionInt(ConsoleColor.Italic + ConsoleColor.Green + 'Cuanto saldo quiere cargar?: ' + ConsoleColor.Reset + ConsoleColor.Reset);
+            console.log(ConsoleColor.Bold+ConsoleColor.Yellow+`            $1 = 3 creditos`+ConsoleColor.Reset)
+            montoIngresado = rs.questionInt(ConsoleColor.Italic + ConsoleColor.Green + '...Cuanto saldo quiere cargar?: ' + ConsoleColor.Reset + ConsoleColor.Reset);
         }
         let saldoAnterior = fs.readFileSync('saldo.txt', 'utf-8')
         let parsedSaldo = parseInt(saldoAnterior);
@@ -41,7 +45,7 @@ export class Jugador {
     }
     private guardarSaldo(): void {
         fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`);
-        rs.question(`presione` + ConsoleColor.Green + ` ENTER` + ConsoleColor.Reset + ` para ir a Juegos. `)
+        rs.question(`presione` + ConsoleColor.Green + ` ENTER` + ConsoleColor.Reset + ` para ir a Juegos `)
         opcion3()
     }
 
@@ -52,7 +56,7 @@ export class Jugador {
     retiraEfectivo() {
         let intentos: number = 3
         for (let i = 3; i >= 0; i--) {
-            let ingresar = rs.question(ConsoleColor.Blue + "Ingrese su contraseña para retirar saldo: "+ ConsoleColor.Reset, { hideEchoBack: true } )
+            let ingresar = rs.question(ConsoleColor.Blue + "Ingrese su contraseña para retirar saldo: ", { hideEchoBack: true }) + ConsoleColor.Reset
             if (ingresar === passwJugador1) {
                 let retirar = this.getSaldoTarj() / 3;
                 this.saldo += parseFloat(retirar.toFixed(2));
@@ -64,7 +68,7 @@ export class Jugador {
             } else {
                 intentos--
                 console.log(ConsoleColor.Red + "Contraseña incorrecta" + ConsoleColor.Reset);
-                console.log("Tiene " + ConsoleColor.Red + intentos + ConsoleColor.Reset + " intentos restantes. Si no ingresa la contraseña correcta perdera su saldo.")
+                console.log("tiene " + ConsoleColor.Red + intentos + ConsoleColor.Reset + "si no ingresa la contraseña correcta perdera su saldo")
                 if (intentos === 0) {
                     console.log(ConsoleColor.Red + "no puede recuperar su saldo" + ConsoleColor.Reset)
                     console.log(ConsoleColor.Red + "cuenta bloqueada, debe salir del casino" + ConsoleColor.Reset)
@@ -82,7 +86,7 @@ export class Jugador {
     retiraEfectivoSalida() {
         let intentos: number = 3
         for (let i = 3; i >= 0; i--) {
-            let ingresar = rs.question("Ingrese su contraseña para retirar saldo: ", { hideEchoBack: true });
+            let ingresar = rs.question("Ingrese su password para retirar saldo: ", { hideEchoBack: true });
             if (ingresar === passwJugador1) {
                 let retirar = this.getSaldoTarj() / 3;
                 this.saldo += parseFloat(retirar.toFixed(2));
@@ -95,7 +99,7 @@ export class Jugador {
             } else {
                 intentos--
                 console.log(ConsoleColor.Red + "Contraseña incorrecta" + ConsoleColor.Reset);
-                console.log("tiene " + ConsoleColor.Red + intentos + ConsoleColor.Reset + " intentos restantes. Si no ingresa la contraseña correcta, perdera su saldo")
+                console.log("tiene " + ConsoleColor.Red + intentos + ConsoleColor.Reset + "si no ingresa la contraseña correcta perdera su saldo")
                 if (intentos === 0) {
                     console.log(ConsoleColor.Red + "No puede recuperar su saldo" + ConsoleColor.Reset)
                     console.log(ConsoleColor.Red + "cuenta bloqueada, debe salir del casino" + ConsoleColor.Reset)
