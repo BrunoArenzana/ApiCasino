@@ -1,9 +1,5 @@
 export interface iApostar {
+  
+apuestaMinimaMaxima(minima: number, maxima: number): void;
 
-  //saldo: number;
-  //apuesta: number;
-  apuestaMinimaMaxima(minima: number, maxima: number): void;
- // calcularGanancia(): number;
-  //sumarSaldo(): void;
-  //restarSaldo(): void;
 }

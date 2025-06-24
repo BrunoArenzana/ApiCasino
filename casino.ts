@@ -1,36 +1,23 @@
-import { Juegos } from './juegos';
+import { Juegos } from './abstractJuegos';
 import { Jugador } from './jugador';
-export class Casino{
-private nombre:string;
-//private jugador:Jugador;
-//private juegos:Juegos[]
+export class Casino {
+    private nombre: string;
+    //private jugador:Jugador;
+    //private juegos:Juegos[]
 
 
-//private creditoCasino:number;
+    //private creditoCasino:number;
 
-constructor(pNombre:string){
-    this.nombre=pNombre
+    constructor(pNombre: string) {
+        this.nombre = pNombre
+    }
 
-    
-}
+    getNombre() {
+        return this.nombre
+    }
 
-getNombre(){
-    return this.nombre
-}
-setNombre(nombre:string){
-    this.nombre=nombre
-};
-
-
-/*getComprarCreditoTarjeta(){
-    return this.jugador.getSaldoTarj()
-};
-
-
-
-getCambiarSaldoTarjeta(){
-    return this.jugador.getSaldo()
-
-};*/
+    setNombre(nombre: string) {
+        this.nombre = nombre
+    };
 
 }

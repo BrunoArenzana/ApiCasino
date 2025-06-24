@@ -1,20 +1,34 @@
 {
-  "name": "apicasino",
+  "name": "dev",
   "version": "1.0.0",
   "description": "Final Cuatrimestre",
   "main": "index.js",
+  "type": "commonjs",
+  "dependencies": {
+    "configuration-processor": "^1.1.1",
+    "data-container": "^1.1.0",
+    "event-dispatcher": "^2.4.0",
+    "filesystem": "^1.0.1",
+    "readline-sync": "^1.4.10",
+    "undici-types": "^6.21.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrunoArenzana/ApiCasino.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^22.15.26",
-    "@types/readline-sync": "^1.4.8"
+  "bugs": {
+    "url": "https://github.com/BrunoArenzana/ApiCasino/issues"
   },
-  "dependencies": {
-    "filesystem": "^1.0.1",
-    "readline-sync": "^1.4.10"
+  "homepage": "https://github.com/BrunoArenzana/ApiCasino#readme",
+  "devDependencies": {
+    "@types/readline-sync": "^1.4.8",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
