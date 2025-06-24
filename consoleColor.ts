@@ -14,6 +14,5 @@ export enum ConsoleColor {
     Inverse = "\x1b[7m", 
     Hidden = "\x1b[8m",
     Strikethrough = "\x1b[9m ",
-
 }
 //console.log(ConsoleColor.Red + "texto a colorear"+ ConsoleColor.Reset);
