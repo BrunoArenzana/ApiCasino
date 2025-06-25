@@ -8,14 +8,12 @@ export class Jugador {
     private name: string;
     private saldo: number;
     private saldoTarjeta: number;
-    private retirar: number;
     private static ARCHIVO_SALDO = 'saldo.txt';
 
     private constructor(pName: string) {
         this.name = pName;
         this.saldo = 0;
         this.saldoTarjeta = 0;
-        this.retirar = 0;
     }
     static getInstance(name: string = ''): Jugador {
         if (!Jugador.inst) {
@@ -24,12 +22,12 @@ export class Jugador {
         return Jugador.inst;
     }
     setSaldoCarga() {
-        console.log(ConsoleColor.Bold+ConsoleColor.Yellow+`            $1 = 3 creditos`+ConsoleColor.Reset)
+        console.log(ConsoleColor.Bold + ConsoleColor.Yellow + `            $1 = 3 creditos` + ConsoleColor.Reset)
         let montoIngresado = rs.questionInt(ConsoleColor.Italic + ConsoleColor.Green + '...Cuanto saldo quiere cargar?: ' + ConsoleColor.Reset + ConsoleColor.Reset);
         while (montoIngresado < 100) {
             console.clear();
             console.log(ConsoleColor.Red + 'El monto no puede ser menor a 100 creditos' + ConsoleColor.Reset);
-            console.log(ConsoleColor.Bold+ConsoleColor.Yellow+`            $1 = 3 creditos`+ConsoleColor.Reset)
+            console.log(ConsoleColor.Bold + ConsoleColor.Yellow + `            $1 = 3 creditos` + ConsoleColor.Reset)
             montoIngresado = rs.questionInt(ConsoleColor.Italic + ConsoleColor.Green + '...Cuanto saldo quiere cargar?: ' + ConsoleColor.Reset + ConsoleColor.Reset);
         }
         let saldoAnterior = fs.readFileSync('saldo.txt', 'utf-8')
@@ -56,7 +54,7 @@ export class Jugador {
     retiraEfectivo() {
         let intentos: number = 3
         for (let i = 3; i >= 0; i--) {
-            let ingresar = rs.question(ConsoleColor.Blue + "Ingrese su contraseña para retirar saldo: "+ ConsoleColor.Reset, { hideEchoBack: true })
+            let ingresar = rs.question(ConsoleColor.Blue + "Ingrese su password para retirar saldo: " + ConsoleColor.Reset, { hideEchoBack: true });
             if (ingresar === passwJugador1) {
                 let retirar = this.getSaldoTarj() / 3;
                 this.saldo += parseFloat(retirar.toFixed(2));
@@ -67,8 +65,8 @@ export class Jugador {
 
             } else {
                 intentos--
-                console.log(ConsoleColor.Red + "Contraseña incorrecta" + ConsoleColor.Reset);
-                console.log("tiene " + ConsoleColor.Red + intentos + ConsoleColor.Reset + "si no ingresa la contraseña correcta perdera su saldo")
+                console.log(ConsoleColor.Red + "password incorrecta" + ConsoleColor.Reset);
+                console.log("tiene " + ConsoleColor.Red + intentos + ConsoleColor.Reset + "si no ingresa la password correcta perdera su saldo")
                 if (intentos === 0) {
                     console.log(ConsoleColor.Red + "no puede recuperar su saldo" + ConsoleColor.Reset)
                     console.log(ConsoleColor.Red + "cuenta bloqueada, debe salir del casino" + ConsoleColor.Reset)
@@ -98,8 +96,8 @@ export class Jugador {
 
             } else {
                 intentos--
-                console.log(ConsoleColor.Red + "Contraseña incorrecta" + ConsoleColor.Reset);
-                console.log("tiene " + ConsoleColor.Red + intentos + ConsoleColor.Reset + "si no ingresa la contraseña correcta perdera su saldo")
+                console.log(ConsoleColor.Red + "password incorrecta" + ConsoleColor.Reset);
+                console.log("tiene " + ConsoleColor.Red + intentos + ConsoleColor.Reset + "si no ingresa la password correcta perdera su saldo")
                 if (intentos === 0) {
                     console.log(ConsoleColor.Red + "No puede recuperar su saldo" + ConsoleColor.Reset)
                     console.log(ConsoleColor.Red + "cuenta bloqueada, debe salir del casino" + ConsoleColor.Reset)
@@ -108,13 +106,11 @@ export class Jugador {
                 }
             }
         }
-
-
     }
 
     modificarSaldoTarj(cantidad: number) {
         this.saldoTarjeta += cantidad;
-        //this.guardarSaldo();
+       
     }
     getSaldoTarj() {
         return this.saldoTarjeta;

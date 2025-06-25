@@ -5,7 +5,7 @@ import { opcion1 } from '.';
 import * as fs from 'fs';
 import { Juegos } from './abstractJuegos';
 import { ConsoleColor } from './consoleColor';
-import { Console } from 'console';
+
 
 
 export class Ruleta extends Juegos implements iApostar {
@@ -56,10 +56,10 @@ export class Ruleta extends Juegos implements iApostar {
         //console.clear();
         //usamos un color asignado al principio y reseteamos el color 
         console.log(ConsoleColor.Green + '\n=== MENU PRINCIPAL ===' + ConsoleColor.Reset);
-        console.log(ConsoleColor.Magenta + '1' + ConsoleColor.Reset + 'Agregar apuesta');
-        console.log(ConsoleColor.Magenta + '2' + ConsoleColor.Reset + 'Ver apuestas');
-        console.log(ConsoleColor.Magenta + '3' + ConsoleColor.Reset + 'Girar ruleta');
-        console.log(ConsoleColor.Magenta + '4' + ConsoleColor.Reset + 'Salir');
+        console.log(ConsoleColor.Magenta + '1-' + ConsoleColor.Reset + ' Agregar apuesta');
+        console.log(ConsoleColor.Magenta + '2-' + ConsoleColor.Reset + ' Ver apuestas');
+        console.log(ConsoleColor.Magenta + '3-' + ConsoleColor.Reset + ' Girar ruleta');
+        console.log(ConsoleColor.Magenta + '4-' + ConsoleColor.Reset + ' Salir');
         total = this.calcularMontoApuestas();
         console.log(ConsoleColor.Green + `Credito actual: `+ConsoleColor.Reset+ConsoleColor.Yellow+` ${this.jugador.getSaldoTarj() - total}`+ConsoleColor.Reset);
     }
