@@ -25,9 +25,33 @@ export class Tragamonedas extends Juegos implements iApostar {
     getNombre() {
         return this.nombre;
     }
+    getFiguras(){
+        return this.figuras;
+    }
+
+    getApuestaMinima(){
+        return this.apuestaMinima;
+    }
+    getApuesta(){
+        return this.apuesta;
+    }
+    getApuestaMaxima(){
+        return this.apuestaMaxima;
+    }
     setNombre(pNombre:string):void{
         this.nombre = pNombre;
     }
+    setFiguras(pFiguras:string[]):void{
+        this.figuras=pFiguras;
+    }
+    setApuestaMinima(pApuestaMinima:number):void{
+        this.apuestaMinima=pApuestaMinima;
+    }
+    setApuestaMaxima(pApuestaMaxima:number):void{
+        this.apuestaMaxima=pApuestaMaxima;
+    }
+
+    
     apuestaMinimaMaxima(): void {
         if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
             console.log(ConsoleColor.Red + `No tiene creditos suficientes, debe comprar más creditos`+ ConsoleColor.Reset );

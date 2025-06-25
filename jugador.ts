@@ -56,7 +56,7 @@ export class Jugador {
     retiraEfectivo() {
         let intentos: number = 3
         for (let i = 3; i >= 0; i--) {
-            let ingresar = rs.question(ConsoleColor.Blue + "Ingrese su contraseña para retirar saldo: ", { hideEchoBack: true }) + ConsoleColor.Reset
+            let ingresar = rs.question(ConsoleColor.Blue + "Ingrese su contraseña para retirar saldo: "+ ConsoleColor.Reset, { hideEchoBack: true })
             if (ingresar === passwJugador1) {
                 let retirar = this.getSaldoTarj() / 3;
                 this.saldo += parseFloat(retirar.toFixed(2));
