@@ -1,7 +1,17 @@
 //palo y valor para las cartas)
+import { ConsoleColor } from "./consoleColor";
 const valores: string[] = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 type Palo = "♠" | "♥" | "♦" | "♣";
 const palos: Palo[] = ["♠", "♥", "♦", "♣"];
+
+function imprimirConColor(palo: Palo): string {
+    if (palo === "♥" || palo === "♦") {
+        return `${ConsoleColor.Red}${palo}${ConsoleColor.Reset}`;
+    }else if (palo === "♣" || palo === "♠"){
+        return `${palo}`
+    }
+    return palo;
+}
 //valor numerico para las cartas j,q,k,a y conversion de string a number
 function valorNumerico(valor: string): number {
     if (valor == "J") return 11;
@@ -25,7 +35,7 @@ getValorNumerico(): number {
     return valorNumerico(this.valor);
 }
 toString(): string {
-    return `${this.valor} de ${this.palo}`;
+    return `${this.valor} ${ConsoleColor.Green}de${ConsoleColor.Reset} ${imprimirConColor(this.palo)}`;
 }
 }
 //clase mazo
@@ -52,4 +62,3 @@ sacarCartaAleatoria(): Carta | null {
     return this.cartas.splice(i,1)[0];
 }
 }
-//nota para mas tarde(opcional): dividir en dos el metodo sacar carta aleatoria
