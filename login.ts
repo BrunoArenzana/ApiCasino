@@ -28,7 +28,7 @@ export class Login {
     intentos--;
     if (intentos > 0) {
       console.log(`Contraseña inválida. Te quedan ${intentos} intento(s).`);
-      this.password = rs.question("Reingresá tu contraseña:");
+      this.password = rs.question("Reingresá tu contraseña: ",{ hideEchoBack: true  });
     } else {
       console.error("Has excedido los 3 intentos. Acceso denegado.");
     }

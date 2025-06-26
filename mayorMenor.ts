@@ -4,7 +4,7 @@ import { Carta, Mazo } from './mazoDeCartas';
 import { iApostar } from './iApostar';
 import { Jugador } from "./jugador";
 import { opcion1 } from '.';
-import { Juegos } from "./juegos";
+import { Juegos } from "./abstractJuegos";
 import { ConsoleColor } from "./consoleColor";
 
 export class MayorMenor extends Juegos implements iApostar {

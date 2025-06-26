@@ -19,7 +19,6 @@ const login1 = new Login(nombreJugador1,passwJugador1,edadJugador1)
 const loginValido = login1.validateLogin(); // agregado para verificar clave
 const jugador1 = Jugador.getInstance(nombreJugador1);
 
-
 if (!loginValido) {
     console.log(ConsoleColor.Red +'No se puede continuar debido a errores de validación'+ConsoleColor.Reset);
     salir();
