@@ -47,7 +47,9 @@ export class Tragamonedas extends Juegos implements iApostar {
             return;
         }
         let apuesta: number = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
+
         console.clear()
+
         console.log(ConsoleColor.Green+`** Tragamonedas ${this.nombre} **`+ConsoleColor.Reset);
         while (
             apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || apuesta > this.jugador.getSaldoTarj()
