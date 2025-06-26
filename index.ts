@@ -70,9 +70,7 @@ export function opcion3() {
                 submenuTragamonedas();
                 break;
             case 4:
-                ejecutarMenu();
-                //se vuelve a ruleta ver, se envio a ejecutarmenu()
-                //salir = true;
+                ejecutarMenu();                
                 break;
             default:
                console.log(ConsoleColor.Red+`Opción inválida. Intente de nuevo opciones 1 a 4.`+ConsoleColor.Reset);
@@ -86,9 +84,9 @@ function submenuTragamonedas() {
     while (!salir) {
         console.clear();
         console.log(ConsoleColor.Green+`** Estas en Tragamonedas **`+ConsoleColor.Reset);
-        console.log(ConsoleColor.Magenta+`1- `+ConsoleColor.Reset+` Jugar Tragamonedas Logo`);
-        console.log(ConsoleColor.Magenta+`2- `+ConsoleColor.Reset+` Jugar Tragamonedas Números`);
-        console.log(ConsoleColor.Magenta+`3- `+ConsoleColor.Reset+` Volver al menú anterior`);
+        console.log(ConsoleColor.Magenta+`1-`+ConsoleColor.Reset+` Jugar Tragamonedas Logo`);
+        console.log(ConsoleColor.Magenta+`2-`+ConsoleColor.Reset+` Jugar Tragamonedas Números`);
+        console.log(ConsoleColor.Magenta+`3-`+ConsoleColor.Reset+` Volver al menú anterior`);
 
         let opcionTraga = rs.questionInt(`Seleccionar juego (1-3): `);
         switch (opcionTraga) {
