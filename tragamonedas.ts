@@ -9,7 +9,7 @@ import { ConsoleColor } from './consoleColor';
 export class Tragamonedas extends Juegos implements iApostar {
     private nombre: string;
     private figuras: string[];
-    public apuesta: number;
+    private apuesta: number; // era public, modificado
     private apuestaMinima: number;
     private apuestaMaxima: number;
     protected jugador!: Jugador;
@@ -21,7 +21,19 @@ export class Tragamonedas extends Juegos implements iApostar {
         this.apuesta = 0;
         this.apuestaMinima = pApuestaMinima;
         this.apuestaMaxima = pApuestaMaxima;
+    }   
+    getApuestaMinima(){
+        return this.apuestaMinima;
     }
+    getApuestaMaxima(){
+        return this.apuestaMaxima;
+    }
+    setApuestaMinima(pApuestaMinima:number):void{
+        this.apuestaMinima=pApuestaMinima;
+    }
+    setApuestaMaxima(pApuestaMaxima:number):void{
+        this.apuestaMaxima=pApuestaMaxima;
+    }    
     getNombre() {
         return this.nombre;
     }
@@ -103,6 +115,5 @@ export class Tragamonedas extends Juegos implements iApostar {
                 console.log(+ConsoleColor.Green+`Gracias por jugar!`+ConsoleColor.Reset);
             }
         }
-    }
-    
+    }    
 }
