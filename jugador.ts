@@ -8,13 +8,15 @@ export class Jugador {
     private name: string;
     private saldo: number;
     private saldoTarjeta: number;
+    //declaracion del archivo txt
     private static ARCHIVO_SALDO = 'saldo.txt';
-
+    
     private constructor(pName: string) {
         this.name = pName;
         this.saldo = 0;
         this.saldoTarjeta = 0;
     }
+    // Patron de diseño Singleton 
     static getInstance(name: string = ''): Jugador {
         if (!Jugador.inst) {
             Jugador.inst = new Jugador(name);
@@ -46,11 +48,9 @@ export class Jugador {
         rs.question(`presione` + ConsoleColor.Green + ` ENTER` + ConsoleColor.Reset + ` para ir a Juegos `)
         opcion3()
     }
-
     setSaldo(pSaldo: number): void {
         this.saldoTarjeta = pSaldo;
     }
-
     retiraEfectivo() {
         let intentos: number = 3
         for (let i = 3; i >= 0; i--) {
@@ -75,10 +75,7 @@ export class Jugador {
                 }
             }
         }
-
-
     }
-    //agregado
     retiraEfectivoSalida() {
         let intentos: number = 3
         for (let i = 3; i >= 0; i--) {
@@ -90,8 +87,6 @@ export class Jugador {
                 console.log(`Retiraste: ` + ConsoleColor.Yellow + `$${parseFloat(retirar.toFixed(2))}.-` + ConsoleColor.Reset);
                 fs.writeFileSync('saldo.txt', `${this.getSaldoTarj()}`);
                 break;
-
-
             } else {
                 intentos--
                 console.log(ConsoleColor.Red + "password incorrecta" + ConsoleColor.Reset);
@@ -106,8 +101,7 @@ export class Jugador {
         }
     }
     modificarSaldoTarj(cantidad: number) {
-        this.saldoTarjeta += cantidad;
-       
+        this.saldoTarjeta += cantidad;       
     }
     getSaldoTarj() {
         return this.saldoTarjeta;
