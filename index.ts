@@ -154,7 +154,6 @@ export function ejecutarMenu() {
                     salir();
                 }
                 break;
-
             default:
                 console.log(ConsoleColor.Red + `Opción inválida. Intente de nuevo opciones 1 a 4.` + ConsoleColor.Reset);
                 rs.question(`Presione` + ConsoleColor.Green + ` ENTER` + ConsoleColor.Reset + ` para Seguir`);
