@@ -12,8 +12,4 @@ export class Casino {
         return this.nombre
     }
 
-    setNombre(nombre: string) {
-        this.nombre = nombre
-    };
-
 }
