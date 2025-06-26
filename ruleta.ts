@@ -149,7 +149,7 @@ export class Ruleta extends Juegos implements iApostar {
     }
     private girarRuleta() {
         if (this.apuestasActuales.length === 0) {
-            console.log(+ConsoleColor.Red+'\nNo hay apuestas para jugar'+ConsoleColor.Reset);
+            console.log(ConsoleColor.Red+'\nNo hay apuestas para jugar'+ConsoleColor.Reset);
             return;
         }
 
@@ -213,36 +213,27 @@ export class Ruleta extends Juegos implements iApostar {
                 `${gananciaNeta >= 0 ? '+' : ''}${gananciaNeta + apuesta.monto} creditos`
             );
         });
-
         this.saldo += gananciaTotal;
         this.jugador.setSaldo(this.saldo);
-
         fs.writeFileSync('saldo.txt', `${this.saldo}`);
-
         console.log(`\nCredito actual: `+ConsoleColor.Yellow+`${this.saldo}`+ConsoleColor.Reset);
     }
-
     private determinarColor(numero: number): string {
         return numero === 0 ? 'verde' :
             this.rojos.includes(numero) ? 'rojo' : 'negro';
     }
-
     private terminarJuego() {
-        console.log(+ConsoleColor.Green+`\nGracias por jugar!`+ConsoleColor.Reset+` Saldo final: `+ConsoleColor.Yellow + `$${this.saldo}`+ConsoleColor.Reset);
+        console.log(ConsoleColor.Green+`\nGracias por jugar!`+ConsoleColor.Reset+` Saldo final: `+ConsoleColor.Yellow + `$${this.saldo}`+ConsoleColor.Reset);
     }
-
 public getApuestaMinima(): number {
   return this.apuestaMinima;
 }
-
 public setApuestaMinima(valor: number): void {
   this.apuestaMinima = valor;
 }
-
 public getApuestaMaxima(): number {
   return this.apuestaMaxima;
 }
-
 public setApuestaMaxima(valor: number): void {
   this.apuestaMaxima = valor;
 }

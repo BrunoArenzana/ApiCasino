@@ -47,7 +47,7 @@ export class Tragamonedas extends Juegos implements iApostar {
             return;
         }
         let apuesta: number = rs.questionInt(`Introduce una apuesta entre ${this.apuestaMinima} y ${this.apuestaMaxima}: `);
-        console.clear()//agregado para probar
+        console.clear()
         console.log(ConsoleColor.Green+`** Tragamonedas ${this.nombre} **`+ConsoleColor.Reset);
         while (
             apuesta < this.apuestaMinima || apuesta > this.apuestaMaxima || apuesta > this.jugador.getSaldoTarj()
@@ -64,6 +64,7 @@ export class Tragamonedas extends Juegos implements iApostar {
         const i = Math.floor(Math.random() * this.figuras.length);
         return this.figuras[i];
     }
+    //armado random de los rodillos
     public tirar(): string[] {
         const resultado = [this.random(), this.random(), this.random(), this.random()];
         console.log(`   < ${resultado.join(" - ")} >`);
