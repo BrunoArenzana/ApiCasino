@@ -25,16 +25,18 @@ export class Ruleta extends Juegos implements iApostar {
         this.jugador = pJugador;
         this.saldo = this.jugador.getSaldoTarj();
     }
+    //apuesta minimaMaxima verifica que el saldo de la tarjeta sea mayor al minimo requerido por el juego
     apuestaMinimaMaxima(): void {
         if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
             console.log(ConsoleColor.Red + "No tiene saldo suficiente, debe comprar más saldo" + ConsoleColor.Reset);
             opcion1();
         }
     }
+    //jugar es el unico metodo publico, desde ahi llamamos al resto de los metodos de la ruleta segun cada opcion
     jugar(): void {
         console.log(ConsoleColor.Green + `Bienvenido a la Ruleta Loca!!! Saldo inicial: $${this.saldo}` + ConsoleColor.Reset);
         this.apuestaMinimaMaxima();
-
+        //verificamos que mientras el saldo sea mayor que 0 pesos, nos muestre el menu de juego con las opciones
         while (this.saldo >= 0) {
             this.mostrarMenu();
             const opcion = rs.question('Opcion: ');
@@ -53,8 +55,6 @@ export class Ruleta extends Juegos implements iApostar {
     }
     private mostrarMenu() {
         let total: number;
-        //console.clear();
-        //usamos un color asignado al principio y reseteamos el color 
         console.log(ConsoleColor.Green + '\n=== MENU PRINCIPAL ===' + ConsoleColor.Reset);
         console.log(ConsoleColor.Magenta + '1-' + ConsoleColor.Reset + ' Agregar apuesta');
         console.log(ConsoleColor.Magenta + '2-' + ConsoleColor.Reset + ' Ver apuestas');
@@ -122,12 +122,12 @@ export class Ruleta extends Juegos implements iApostar {
                 this.agregarApuesta();
                 break;
         }
+        //monto actualizado matiene el saldo actualizado descontando el valor del arreglo de apuestas
         let montoActualizado: number = this.calcularMontoApuestas();
         console.log(`Ingrese el monto a apostar ` + ConsoleColor.Yellow+`credito disponible: ${this.saldo - montoActualizado}`)+ConsoleColor.Reset;
         const monto = rs.questionFloat('Monto: ');
 
         if (monto < this.apuestaMinima || monto > this.saldo - montoActualizado || monto > this.apuestaMaxima) {
-
             //verificamos el monto de la apuesta , que no sea menor a 0 ni mayor al saldo actual
             console.log(ConsoleColor.Red+`Monto inválido.`+ConsoleColor.Reset+` La apuesta minima es de ${this.apuestaMinima}, la maxima es de ${this.apuestaMaxima} y no menor a su saldo`);
             return;
