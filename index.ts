@@ -8,7 +8,7 @@ import { Ruleta } from "./ruleta";
 import { Login } from "./login";
 import { ConsoleColor } from "./consoleColor";
 
-let casino1 = new Casino(`Casino 404`);
+let casino1 = new Casino(`404`);
 let nombreJugador1: string = rs.question(ConsoleColor.Bold + ConsoleColor.Blue + `Ingrese su nombre: ` + ConsoleColor.Reset);
 let edadJugador1: number = rs.questionInt(ConsoleColor.Bold + ConsoleColor.Blue + `Ingrese su edad: ` + ConsoleColor.Reset);
 export let passwJugador1: string = rs.question(ConsoleColor.Bold + ConsoleColor.Blue + `Ingrese una password (debe recordarla): ` + ConsoleColor.Reset, { hideEchoBack: true });
