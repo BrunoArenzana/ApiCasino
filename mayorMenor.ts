@@ -4,7 +4,7 @@ import { Carta, Mazo } from './mazoDeCartas';
 import { iApostar } from './iApostar';
 import { Jugador } from "./jugador";
 import { opcion1 } from '.';
-import { Juegos } from "./abstractJuegos";
+import { Juegos } from './abstractJuegos';
 import { ConsoleColor } from "./consoleColor";
 
 export class MayorMenor extends Juegos implements iApostar {
@@ -14,14 +14,11 @@ export class MayorMenor extends Juegos implements iApostar {
     private carta: Carta;
     private apuestaMinima: number;
     private apuestaMaxima: number;
-    public apuesta: number;
-    public saldo1: number;
-
+    private apuesta: number; // era public, modificado
     //constructor-----------------------------------------------------------------
     constructor(pJugador: Jugador, pApuestaMinima: number, pApuestaMaxima: number) {
         super();
         this.jugador = pJugador;
-        this.saldo1 = this.jugador.getSaldoTarj();
         this.apuestaMinima = pApuestaMinima;
         this.apuestaMaxima = pApuestaMaxima;
         this.apuesta = 0;
@@ -144,4 +141,20 @@ export class MayorMenor extends Juegos implements iApostar {
 
         }
     }
+    
+public getApuestaMinima(): number {
+  return this.apuestaMinima;
+}
+
+public setApuestaMinima(valor: number): void {
+  this.apuestaMinima = valor;
+}
+
+public getApuestaMaxima(): number {
+  return this.apuestaMaxima;
+}
+
+public setApuestaMaxima(valor: number): void {
+  this.apuestaMaxima = valor;
+}
 }

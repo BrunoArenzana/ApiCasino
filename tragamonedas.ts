@@ -9,7 +9,7 @@ import { ConsoleColor } from './consoleColor';
 export class Tragamonedas extends Juegos implements iApostar {
     private nombre: string;
     private figuras: string[];
-    private apuesta: number;//modif
+    private apuesta: number; // era public, modificado
     private apuestaMinima: number;
     private apuestaMaxima: number;
     protected jugador!: Jugador;
@@ -21,27 +21,26 @@ export class Tragamonedas extends Juegos implements iApostar {
         this.apuesta = 0;
         this.apuestaMinima = pApuestaMinima;
         this.apuestaMaxima = pApuestaMaxima;
-    }
-   
-    public getApuestaMinima(){
+    }   
+    getApuestaMinima(){
         return this.apuestaMinima;
     }
-    public getApuestaMaxima(){
+    getApuestaMaxima(){
         return this.apuestaMaxima;
     }
-    public setApuestaMinima(pApuestaMinima:number):void{
+    setApuestaMinima(pApuestaMinima:number):void{
         this.apuestaMinima=pApuestaMinima;
     }
-    public setApuestaMaxima(pApuestaMaxima:number):void{
+    setApuestaMaxima(pApuestaMaxima:number):void{
         this.apuestaMaxima=pApuestaMaxima;
     }    
-    public getNombre() {
+    getNombre() {
         return this.nombre;
     }
-    public setNombre(pNombre:string):void{
+    setNombre(pNombre:string):void{
         this.nombre = pNombre;
     }
-    public apuestaMinimaMaxima(): void {
+    apuestaMinimaMaxima(): void {
         if (this.jugador.getSaldoTarj() < this.apuestaMinima) {
             console.log(ConsoleColor.Red + `No tiene creditos suficientes, debe comprar más creditos`+ ConsoleColor.Reset );
             opcion1();
@@ -61,16 +60,16 @@ export class Tragamonedas extends Juegos implements iApostar {
         }
         this.apuesta = apuesta;
     }
-    private random(): string {
+    public random(): string {
         const i = Math.floor(Math.random() * this.figuras.length);
         return this.figuras[i];
     }
-    private tirar(): string[] {
+    public tirar(): string[] {
         const resultado = [this.random(), this.random(), this.random(), this.random()];
         console.log(`   < ${resultado.join(" - ")} >`);
         return resultado;
     }
-    private calcularResultado(resultado: string[]): void {
+    public calcularResultado(resultado: string[]): void {
         let repetido = 0;
         for (let i = 0; i < resultado.length; i++) {
             let contador = 0;
@@ -99,7 +98,7 @@ export class Tragamonedas extends Juegos implements iApostar {
         console.log(`creditos actuales: `+ConsoleColor.Yellow + `${this.jugador.getSaldoTarj()}`+ConsoleColor.Reset);;
         fs.writeFileSync('saldo.txt', `${this.jugador.getSaldoTarj()}`);
     }
-    public jugar() {
+    jugar() {
         let seguir = true;
         while (seguir) {
             console.log(ConsoleColor.Green+`** Tragamonedas ${this.nombre} **`+ConsoleColor.Reset);
@@ -116,6 +115,5 @@ export class Tragamonedas extends Juegos implements iApostar {
                 console.log(+ConsoleColor.Green+`Gracias por jugar!`+ConsoleColor.Reset);
             }
         }
-    }
-    
+    }    
 }

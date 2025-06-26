@@ -12,7 +12,6 @@ function imprimirConColor(palo: Palo): string {
     }
     return palo;
 }
-
 //valor numerico para las cartas j,q,k,a y conversion de string a number
 function valorNumerico(valor: string): number {
     if (valor == "J") return 11;
@@ -63,4 +62,3 @@ sacarCartaAleatoria(): Carta | null {
     return this.cartas.splice(i,1)[0];
 }
 }
-//nota para mas tarde(opcional): dividir en dos el metodo sacar carta aleatoria

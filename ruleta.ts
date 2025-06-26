@@ -15,9 +15,9 @@ export class Ruleta extends Juegos implements iApostar {
     private ultimoNumero: number | null = null;
     private ultimoColor: string | null = null;  // lo uso cuando le asigno this.ultimoColor=color, no se poe que queda en gris...
     private apuestasActuales: Array<{ tipo: 'numero' | 'color' | 'par-impar'; opcion: string | number; monto: number; }> = []; // creo el arreglo para guardar las apuestas xq pueden ser varias diferentes!
-    private jugador: Jugador;
+    protected jugador: Jugador;
     private apuestaMinima = 50;
-    private apuestaMaxima = 1001;
+    private apuestaMaxima = 1000;
 
     constructor(pJugador: Jugador) {
         super()
@@ -31,7 +31,7 @@ export class Ruleta extends Juegos implements iApostar {
             opcion1();
         }
     }
-    public jugar(): void {
+    jugar(): void {
         console.log(ConsoleColor.Green + `Bienvenido a la Ruleta Loca!!! Saldo inicial: $${this.saldo}` + ConsoleColor.Reset);
         this.apuestaMinimaMaxima();
 
@@ -63,7 +63,6 @@ export class Ruleta extends Juegos implements iApostar {
         total = this.calcularMontoApuestas();
         console.log(ConsoleColor.Green + `Credito actual: `+ConsoleColor.Reset+ConsoleColor.Yellow+` ${this.jugador.getSaldoTarj() - total}`+ConsoleColor.Reset);
     }
-
     private calcularMontoApuestas(): number {
         let total: number = 0;
         this.apuestasActuales.forEach(apuesta => {
@@ -167,7 +166,6 @@ export class Ruleta extends Juegos implements iApostar {
         this.verificarApuestas();
         this.apuestasActuales = [];
     }
-
     private verificarApuestas() {
         if (this.ultimoNumero === null) return;
 
@@ -204,7 +202,6 @@ export class Ruleta extends Juegos implements iApostar {
                     }
                     break;
             }
-
             const gananciaNeta = gano ? (apuesta.monto * multiplicador - apuesta.monto) : -apuesta.monto;
             gananciaTotal += gananciaNeta;
 
@@ -234,4 +231,19 @@ export class Ruleta extends Juegos implements iApostar {
         console.log(+ConsoleColor.Green+`\nGracias por jugar!`+ConsoleColor.Reset+` Saldo final: `+ConsoleColor.Yellow + `$${this.saldo}`+ConsoleColor.Reset);
     }
 
+public getApuestaMinima(): number {
+  return this.apuestaMinima;
+}
+
+public setApuestaMinima(valor: number): void {
+  this.apuestaMinima = valor;
+}
+
+public getApuestaMaxima(): number {
+  return this.apuestaMaxima;
+}
+
+public setApuestaMaxima(valor: number): void {
+  this.apuestaMaxima = valor;
+}
 }
